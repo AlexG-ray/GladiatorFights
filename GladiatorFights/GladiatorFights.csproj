@@ -43,6 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\FighterBase.cs" />
+    <Compile Include="Fighters\FireKnight.cs" />
+    <Compile Include="Fighters\Monk.cs" />
+    <Compile Include="Fighters\Paladin.cs" />
+    <Compile Include="Fighters\Barbarian.cs" />
+    <Compile Include="Fighters\Gladiator.cs" />
+    <Compile Include="Fighters\Rogue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

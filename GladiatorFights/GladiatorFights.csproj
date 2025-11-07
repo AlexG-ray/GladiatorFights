@@ -50,6 +50,9 @@
     <Compile Include="Fighters\Barbarian.cs" />
     <Compile Include="Fighters\Gladiator.cs" />
     <Compile Include="Fighters\Rogue.cs" />
+    <Compile Include="Interfaces\IAttack.cs" />
+    <Compile Include="Interfaces\IAttackable.cs" />
+    <Compile Include="Interfaces\IDefedse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

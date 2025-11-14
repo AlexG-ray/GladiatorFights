@@ -33,16 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Core\FighterBase.cs" />
     <Compile Include="Fighters\FireKnight.cs" />
     <Compile Include="Fighters\Monk.cs" />
@@ -50,11 +40,11 @@
     <Compile Include="Fighters\Barbarian.cs" />
     <Compile Include="Fighters\Gladiator.cs" />
     <Compile Include="Fighters\Rogue.cs" />
-    <Compile Include="Interfaces\IAttack.cs" />
-    <Compile Include="Interfaces\IAttackable.cs" />
-    <Compile Include="Interfaces\IDefedse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interfaces\IAttacker.cs" />
+    <Compile Include="Interfaces\IDamageable.cs" />
+    <Compile Include="Strategies\IAttackStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

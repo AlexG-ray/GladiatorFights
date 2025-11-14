@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GladiatorFights.Interfaces;
+using System;
 
 namespace GladiatorFights
 {
-    abstract class FighterBase
+    internal abstract class FighterBase : IAttacker, IDamageable
     {
         protected FighterBase(string name, int health, int armor, int damage)
         {
@@ -20,8 +21,35 @@ namespace GladiatorFights
 
         public int Damage { get; protected set; }
 
-        protected abstract void TakeDamage();
-        protected abstract void Attack();
-        protected abstract bool IsAlive();
+        public bool IsAlive => Health > 0;
+
+        public void Attack(IDamageable target)
+        {
+            if (CanAttack(target) == false)
+            {
+                OnAttackDenied(target);
+                return;
+            }
+
+            BeforeAttack(target);
+            int damage = CalculateDamage(target);
+            ApplyDamage(target, damage);
+            AfterAttack(target);
+        }
+
+        public virtual void TakeDamage(int damage)
+        {
+            damage = Math.Max(damage - Armor, 0);
+            Health = Math.Max(Health - damage, 0);
+        }
+
+        protected virtual void OnAttackDenied(IDamageable target) { }
+        protected virtual void ApplyDamage(IDamageable target, int damage) =>
+            target.TakeDamage(damage);
+        protected abstract int CalculateDamage(IDamageable target);
+        protected virtual void AfterAttack(IDamageable target) { }
+        protected virtual void BeforeAttack(IDamageable target) { }
+        protected bool CanAttack(IDamageable target) =>
+            IsAlive && target != null && target.IsAlive;
     }
 }

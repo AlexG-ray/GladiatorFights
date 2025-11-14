@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace GladiatorFights.Fighters
+﻿namespace GladiatorFights.Fighters
 {
     internal class Rogue : FighterBase
     {
-        public Rogue( string name, int health, int armor, int damage) : base(name, health, armor, damage)
+        public Rogue(string name, int health, int armor, int damage) : base(name, health, armor, damage)
         {
         }
 

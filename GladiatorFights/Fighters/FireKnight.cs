@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GladiatorFights.Fighters
+﻿namespace GladiatorFights.Fighters
 {
     internal class FireKnight : FighterBase
     {

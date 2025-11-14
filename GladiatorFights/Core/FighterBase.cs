@@ -1,16 +1,20 @@
 ﻿using GladiatorFights.Interfaces;
+using GladiatorFights.Strategies;
 using System;
 
 namespace GladiatorFights
 {
     internal abstract class FighterBase : IAttacker, IDamageable
     {
-        protected FighterBase(string name, int health, int armor, int damage)
+        protected IAttackStrategy StrategyAttack { get; private set; }
+
+        protected FighterBase(string name, int health, int armor, int damage, IAttackStrategy strategyAttack)
         {
             Name = name;
             Health = health;
             Armor = armor;
             Damage = damage;
+            StrategyAttack = strategyAttack;
         }
 
         public string Name { get; protected set; }
@@ -44,12 +48,23 @@ namespace GladiatorFights
         }
 
         protected virtual void OnAttackDenied(IDamageable target) { }
+
         protected virtual void ApplyDamage(IDamageable target, int damage) =>
             target.TakeDamage(damage);
-        protected abstract int CalculateDamage(IDamageable target);
+
+        protected virtual int CalculateDamage(IDamageable target) =>
+            StrategyAttack.CalculateDamage(this, target);
+
         protected virtual void AfterAttack(IDamageable target) { }
+
         protected virtual void BeforeAttack(IDamageable target) { }
+
         protected bool CanAttack(IDamageable target) =>
             IsAlive && target != null && target.IsAlive;
+
+        protected void SetAttackStrategy(IAttackStrategy strategy)
+        {
+            StrategyAttack = strategy;
+        }
     }
 }

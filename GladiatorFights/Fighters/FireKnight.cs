@@ -1,18 +1,47 @@
-﻿using GladiatorFights.Strategies;
+﻿using GladiatorFights.Interfaces;
+using GladiatorFights.Strategies;
 
 namespace GladiatorFights.Fighters
 {
     internal class FireKnight : FighterBase
     {
+        private readonly IAttackStrategy _fireballAttack;
         private int _mana;
+        private int _manaCostFireball;
+        private int _regenerationMana;
+        private bool _canUsedFireball;
 
-        public FireKnight(string name, int health, int armor, int damage, IAttackStrategy strategyAttack, int mana) 
-            : base(name, health, armor, damage, strategyAttack)
+        public FireKnight(string name, int health, int armor, int damage, int mana)
+            : base(name, health, armor, damage)
         {
             _mana = mana;
+            _manaCostFireball = 8;
+            _regenerationMana = 10;
+            _fireballAttack = new FireballAttackStrategy();
         }
 
+        protected override void BeforeAttack(IDamageable target)
+        {
+            if (_mana >= _manaCostFireball)
+            {
+                SetAttackStrategy(_fireballAttack);
+                _canUsedFireball = true;
+            }
+            else
+            {
+                SetAttackStrategy(s_standardAttack);
+                _canUsedFireball = false;
+            }
+        }
 
-        // пока есть манна аттакует огенным шаром. Огненный шар наносит урон больше обычного
+        protected override void AfterAttack(IDamageable target)
+        {
+            if (_canUsedFireball)
+            {
+                _mana -= _manaCostFireball;
+            }
+
+            _mana += _regenerationMana;
+        }
     }
 }

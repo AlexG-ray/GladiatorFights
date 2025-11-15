@@ -6,15 +6,17 @@ namespace GladiatorFights
 {
     internal abstract class FighterBase : IAttacker, IDamageable
     {
-        protected IAttackStrategy StrategyAttack { get; private set; }
+        protected static readonly StandardAttackStrategy s_standardAttack = new StandardAttackStrategy();
 
-        protected FighterBase(string name, int health, int armor, int damage, IAttackStrategy strategyAttack)
+        protected IAttackStrategy TypeAttack { get; private set; }
+
+        protected FighterBase(string name, int health, int armor, int damage)
         {
             Name = name;
             Health = health;
             Armor = armor;
             Damage = damage;
-            StrategyAttack = strategyAttack;
+            TypeAttack = s_standardAttack;
         }
 
         public string Name { get; protected set; }
@@ -53,7 +55,7 @@ namespace GladiatorFights
             target.TakeDamage(damage);
 
         protected virtual int CalculateDamage(IDamageable target) =>
-            StrategyAttack.CalculateDamage(this, target);
+            TypeAttack.CalculateDamage(this, target);
 
         protected virtual void AfterAttack(IDamageable target) { }
 
@@ -64,7 +66,7 @@ namespace GladiatorFights
 
         protected void SetAttackStrategy(IAttackStrategy strategy)
         {
-            StrategyAttack = strategy;
+            TypeAttack = strategy;
         }
     }
 }

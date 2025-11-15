@@ -8,8 +8,6 @@ namespace GladiatorFights
     {
         protected static readonly StandardAttackStrategy s_standardAttack = new StandardAttackStrategy();
 
-        protected IAttackStrategy TypeAttack { get; private set; }
-
         protected FighterBase(string name, int health, int armor, int damage)
         {
             Name = name;
@@ -18,6 +16,8 @@ namespace GladiatorFights
             Damage = damage;
             TypeAttack = s_standardAttack;
         }
+
+        protected IAttackStrategy TypeAttack { get; private set; }
 
         public string Name { get; protected set; }
 

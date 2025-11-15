@@ -64,9 +64,9 @@ namespace GladiatorFights
         protected bool CanAttack(IDamageable target) =>
             IsAlive && target != null && target.IsAlive;
 
-        protected void SetAttackStrategy(IAttackStrategy strategy)
+        protected void SetAttackStrategy(IAttackStrategy typeAttack)
         {
-            TypeAttack = strategy;
+            TypeAttack = typeAttack;
         }
     }
 }

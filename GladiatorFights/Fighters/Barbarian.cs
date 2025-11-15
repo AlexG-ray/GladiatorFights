@@ -11,12 +11,12 @@ namespace GladiatorFights.Fighters
         private int _fullRage;
         private int _healingAmount;
 
-        public Barbarian(string name, int health, int armor, int damage) :
+        public Barbarian(string name, int health, int armor, int damage, int fullRage) :
             base(name, health, armor, damage)
         {
             _rageAttack = new RageAttackStrategy();
             _rage = 0;
-            _fullRage = 100;
+            _fullRage = fullRage;
             _healingAmount = 20;
         }
 

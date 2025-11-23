@@ -43,5 +43,10 @@ namespace GladiatorFights.Fighters
 
             _mana += _regenerationMana;
         }
+
+        public override string GetSpecialAbilities()
+        {
+            return $"Огненная атака";
+        }
     }
 }

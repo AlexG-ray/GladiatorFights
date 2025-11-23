@@ -68,5 +68,10 @@ namespace GladiatorFights
         {
             TypeAttack = typeAttack;
         }
+
+        public virtual string GetSpecialAbilities()
+        {
+            return "Обычный боец";
+        }
     }
 }

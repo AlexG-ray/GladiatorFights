@@ -51,5 +51,10 @@ namespace GladiatorFights.Fighters
                 _rage = 0;
             }
         }
+
+        public override string GetSpecialAbilities()
+        {
+            return $"Ярость";
+        }
     }
 }

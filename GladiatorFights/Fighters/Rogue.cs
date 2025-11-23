@@ -34,5 +34,10 @@ namespace GladiatorFights.Fighters
 
             return roll <= _lucky;
         }
+
+        public override string GetSpecialAbilities()
+        {
+            return $"Удача";
+        }
     }
 }

@@ -36,5 +36,10 @@ namespace GladiatorFights.Fighters
                 _impactCounter = 0;
             }
         }
+
+        public override string GetSpecialAbilities()
+        {
+            return "Двойной урон";
+        }
     }
 }

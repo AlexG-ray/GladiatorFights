@@ -46,5 +46,10 @@ namespace GladiatorFights.Fighters
                 Health += healAmount;
             }
         }
+
+        public override string GetSpecialAbilities()
+        {
+            return $"Святость";
+        }
     }
 }

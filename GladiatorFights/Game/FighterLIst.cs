@@ -19,15 +19,20 @@ namespace GladiatorFights.Game
                 new Rogue( "Разбойник", 70, 20, 20, 50)
             };
         }
-        
+
+        public int Count => _fighters.Count;
+
         public FighterBase GetFighter(int index)
         {
             if (index >= 0 && index < _fighters.Count)
             {
-                return _fighters[index]; 
+                return _fighters[index];
             }
 
             return null;
         }
+
+        public List<FighterBase> GetAllFighters() =>
+             _fighters;
     }
 }

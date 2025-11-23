@@ -26,5 +26,10 @@ namespace GladiatorFights.Fighters
 
             return roll <= _agility;
         }
+
+        public override string GetSpecialAbilities()
+        {
+            return $"Уклонение";
+        }
     }
 }

@@ -11,12 +11,12 @@ namespace GladiatorFights.Game
         {
             _fighters = new List<FighterBase>()
             {
-                new Barbarian("Варвар", 100, 30, 25, 50),
-                new FireKnight("Оверлорд",90, 80, 10, 40),
-                new Gladiator("Гладиатор", 100, 80 , 25),
-                new Monk("Монах", 80, 30, 20, 40),
-                new Paladin("Паладин", 90, 30, 15, 40 ),
-                new Rogue( "Разбойник", 70, 20, 20, 50)
+                new Barbarian("Nomad", 100, 30, 25, 50),
+                new FireKnight("Warlord",90, 80, 10, 40),
+                new Gladiator("Gladus", 100, 80 , 25),
+                new Monk("Hermit", 80, 30, 20, 40),
+                new Paladin("Crusader", 90, 30, 15, 40 ),
+                new Rogue( "Bandit", 70, 20, 20, 50)
             };
         }
 

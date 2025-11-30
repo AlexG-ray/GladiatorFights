@@ -24,7 +24,7 @@ namespace GladiatorFights.UI
 
         public void Run()
         {
-            _sprite.DrawTextVersus();
+            _sprite.DrawVersusScreen();
             
             Console.ReadKey();
             ShowSplashScreen();

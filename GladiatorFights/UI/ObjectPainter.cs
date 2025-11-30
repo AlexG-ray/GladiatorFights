@@ -14,7 +14,7 @@ namespace GladiatorFights.UI
             Console.SetWindowSize(_windowSizeX, _windowsSizeY);
         }
 
-        public void DrawSplashScreen(bool isInputConfirmed)
+        public void DrawSplashScreen()
         {
             int positionX = 15;
             int positionY = 5;
@@ -45,32 +45,20 @@ namespace GladiatorFights.UI
             Console.WriteLine("╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝");
             Console.SetCursorPosition(positionX, positionY++);
             Console.SetCursorPosition(positionX, positionY++);
+        }
 
-            Console.CursorVisible = false;
-
-            bool isVisible = true;
-
-            while (isInputConfirmed)
+        public void DrawPressAnyKey(int positionX, int positionY, bool isVisible)
+        {
+            Console.SetCursorPosition(positionX, positionY);
+            if (isVisible)
             {
-                Console.SetCursorPosition(positionX, positionY);
-
-                if (isVisible)
-                {
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("Нажмите любую клавишу");
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Black;
-                    Console.Write("Нажмите любую клавишу");
-                }
-
-                isVisible = !isVisible;
-                System.Threading.Thread.Sleep(400);
+                Console.ForegroundColor = ConsoleColor.White;
             }
-
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.CursorVisible = true;
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Black;
+            }
+            Console.Write("Нажмите любую клавишу");
         }
 
         public void DrawCharacterCardTable(List<FighterBase> fighters)
@@ -137,26 +125,6 @@ namespace GladiatorFights.UI
         public void DrawWinnerScreen()
         {
 
-        }
-
-        public void DrawVersusScreen()
-        {
-            int positionX = 20;
-            int positionY = 5;
-
-            DrawNameBarbarian(ref positionX, ref positionY);
-            Thread.Sleep(500);            
-            positionX += 30;
-            positionY += 2;
-            DrawTextVersus(ref positionX, ref positionY);
-            Thread.Sleep(500);            
-            positionX += 7;
-            positionY += 2;
-            DrawNameFireKnight(ref positionX, ref positionY);
-            Thread.Sleep(1000);
-            Console.Clear();
-            DrawTextFight(30, 10);
-            Thread.Sleep(1000);
         }
 
         public void DrawNameBarbarian(int positionX, int positionY)

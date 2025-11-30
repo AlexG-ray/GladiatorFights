@@ -1,5 +1,6 @@
 ﻿using GladiatorFights.Game;
 using System;
+using System.Threading;
 
 namespace GladiatorFights.UI
 {
@@ -24,22 +25,59 @@ namespace GladiatorFights.UI
 
         public void Run()
         {
-            _sprite.DrawVersusScreen();
-            
-            Console.ReadKey();
             ShowSplashScreen();
             ShowAllFighters();
             GetNumberFighters(out _indexFirstFighter, out _indexSecondFighter);
+            ShowVersusScreen();
             _arena = new BattleEngine(_fighters.GetFighter(_indexFirstFighter),_fighters.GetFighter(_indexSecondFighter));
             ShowWinner();
+        }
+
+        private void ShowVersusScreen()
+        {
+            Console.Clear();
+            
+            Thread.Sleep(500);
+            int positionX = 20;
+            int positionY = 5;
+            _sprite.DrawNameBarbarian(ref positionX, ref positionY);
+            Thread.Sleep(700);
+            
+            positionX += 30;
+            positionY += 2;
+            _sprite.DrawTextVersus(ref positionX, ref positionY);
+            Thread.Sleep(700);
+            
+            positionX += 7;
+            positionY += 2;
+            _sprite.DrawNameFireKnight(ref positionX, ref positionY);
+            Thread.Sleep(1000);
+            
+            Console.Clear();
+            _sprite.DrawTextFight(30, 10);
+            Thread.Sleep(1500);
         }
 
         private void ShowSplashScreen()
         {
             Console.Clear();
-            _sprite.DrawSplashScreen(true);
-            //todo:  сделать подтверждение кнопи
-            //todo: определить надо ли метоd
+            _sprite.DrawSplashScreen();
+            
+            int textX = 55;
+            int textY = 19;
+            Console.CursorVisible = false;
+            
+            bool isVisible = true;
+            while (!Console.KeyAvailable)
+            {
+                _sprite.DrawPressAnyKey(textX, textY, isVisible);
+                isVisible = !isVisible;
+                Thread.Sleep(400);
+            }
+            
+            Console.ReadKey(); // Очистить буфер нажатой клавиши
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.CursorVisible = true;
         }
 
         private void ShowAllFighters()

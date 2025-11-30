@@ -1,8 +1,5 @@
 ﻿using GladiatorFights.Game;
 using System;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection.Emit;
 
 namespace GladiatorFights.UI
 {
@@ -10,7 +7,8 @@ namespace GladiatorFights.UI
     {
         private FighterList _fighters;
         private BattleEngine _arena;
-        private int _indexFighter;
+        private int _indexFirstFighter;
+        private int _indexSecondFighter;
         private int _windowSizeX = 110;
         private int _windowSizeY = 270;
 
@@ -19,8 +17,10 @@ namespace GladiatorFights.UI
             Console.SetWindowSize(_windowSizeX, _windowSizeY);
             _fighters = new FighterList();
             ShowSplashScreen();
-            Console.Clear();
             DrawAllCharacterCards();
+            GetNumberFighters(out _indexFirstFighter, out _indexSecondFighter);
+            _arena = new BattleEngine(_fighters.GetFighter(_indexFirstFighter),_fighters.GetFighter(_indexSecondFighter));
+            ShowWinner();
         }
 
         private void ShowSplashScreen()
@@ -83,40 +83,22 @@ namespace GladiatorFights.UI
             Console.ReadKey(true);
         }
 
-        private void ShowAllFighters()
+        private void DrawAllCharacterCards()
         {
             Console.Clear();
 
-            int index = 0;
-
-            foreach (var fighter in _fighters.GetAllFighters())
-            {
-                Console.WriteLine($"{index + 1}\n" +
-                    $"{fighter.Name}:\n" +
-                    $"Здоровье:{fighter.Health}\n" +
-                    $"Броня:{fighter.Armor}\n" +
-                    $"Урон:{fighter.Damage}\n" +
-                    $"Особое умение - {fighter.GetSpecialAbilities()}");
-                Console.WriteLine();
-
-                index++;
-            }
-        }
-
-        private void DrawAllCharacterCards()
-        {
             var fighters = _fighters.GetAllFighters();
-            int cardsPerRow = 3; // Количество карточек в ряду
-            int cardWidth = 35; // Ширина одной карточки
-            int startX = 2;
-            int startY = 2;
+            int cardsPerRow = 3;
+            int cardWidth = 35;
+            int startX = 9;
+            int startY = 1;
 
             for (int i = 0; i < fighters.Count; i++)
             {
                 int row = i / cardsPerRow;
                 int col = i % cardsPerRow;
                 int x = startX + col * cardWidth;
-                int y = startY + row * 10; // 8 строк на карточку
+                int y = startY + row * 10;
 
                 DrawCharacterCard(fighters[i], i + 1, x, y);
             }
@@ -126,23 +108,21 @@ namespace GladiatorFights.UI
 
         private void DrawCharacterCard(FighterBase fighter, int number, int x, int y)
         {
-            int cardWidth = 21; 
+            int cardWidth = 21;
             string nameTitle = "---";
             string numberTitle = "#";
             string hpTitle = "Здоровье:";
             string armorTitle = "Броня:";
             string damageTitle = "Урон:";
             string skillTitle = "Умение:";
-
-
             string border = new string('═', cardWidth);
-            
+
             Console.SetCursorPosition(x, y++);
             Console.Write(border);
-            
-            Console.SetCursorPosition(x + cardWidth/2 - 1, y++);
+
+            Console.SetCursorPosition(x + cardWidth / 2 - 1, y++);
             Console.Write($"{numberTitle}{number.ToString()}");
-            
+
             Console.SetCursorPosition(x, y++);
             Console.Write(border);
 
@@ -163,6 +143,53 @@ namespace GladiatorFights.UI
 
             Console.SetCursorPosition(x, y++);
             Console.Write(border);
+        }
+
+        private void GetNumberFighters(out int indexFirstFighter, out int indexSecondFighter)
+        {
+            Console.WriteLine("Кто будет сегодня драться?");
+            
+            indexFirstFighter = GetValidIndex("Введите номер бойца:");
+            indexSecondFighter = GetValidIndex("Введите номер соперника:");
+        }
+
+        private int GetValidIndex(string text)
+        {
+            int number;
+            int maxFighters = _fighters.Count;
+
+            while (true)
+            {
+                Console.Write(text + " ");
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out number) == false)
+                {
+                    Console.WriteLine("Ошибка: Введите число!");
+                    continue;
+                }
+
+                if (number <= 0)
+                {
+                    Console.WriteLine($"Ошибка: Номер должен быть больше нуля!");
+                    continue;
+                }
+
+                if (number > maxFighters)
+                {
+                    Console.WriteLine($"Ошибка: Номер не должен быть больше {maxFighters}!");
+                    continue;
+                }
+
+                return number - 1;
+            }
+        }
+
+        private void ShowWinner()
+        {
+            Console.Clear();
+            Console.WriteLine($"{_arena.Winner.Name}");
+            Console.ReadKey();
         }
     }
 }

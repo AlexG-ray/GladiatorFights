@@ -62,7 +62,7 @@ namespace GladiatorFights
         protected virtual void BeforeAttack(IDamageable target) { }
 
         protected bool CanAttack(IDamageable target) =>
-            IsAlive && target != null && target.IsAlive;
+            IsAlive && target != null && target.IsAlive && target != this;
 
         protected void SetAttackStrategy(IAttackStrategy typeAttack)
         {
@@ -73,5 +73,7 @@ namespace GladiatorFights
         {
             return "Обычный боец";
         }
+
+        public abstract FighterBase Clone();
     }
 }

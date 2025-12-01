@@ -56,5 +56,10 @@ namespace GladiatorFights.Fighters
         {
             return $"Ярость";
         }
+
+        public override FighterBase Clone()
+        {
+            return new Barbarian(Name, Health, Armor, Damage, _fullRage);
+        }
     }
 }

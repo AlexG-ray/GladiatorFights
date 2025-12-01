@@ -31,5 +31,10 @@ namespace GladiatorFights.Fighters
         {
             return $"Уклонение";
         }
+
+        public override FighterBase Clone()
+        {
+            return new Monk(Name, Health, Armor, Damage, _agility);
+        }
     }
 }

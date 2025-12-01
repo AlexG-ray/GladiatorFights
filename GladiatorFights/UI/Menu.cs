@@ -16,11 +16,6 @@ namespace GladiatorFights.UI
         {
             _sprite = new ObjectPainter();
             _fighters = new FighterList();
-            //ShowSplashScreen();
-            //GetNumberFighters(out _indexFirstFighter, out _indexSecondFighter);
-            //_arena = new BattleEngine(_fighters.GetFighter(_indexFirstFighter),_fighters.GetFighter(_indexSecondFighter));
-            //ShowWinner();
-            //todo; очистить конструктор только для обьектов
         }
 
         public void Run()
@@ -29,30 +24,32 @@ namespace GladiatorFights.UI
             ShowAllFighters();
             GetNumberFighters(out _indexFirstFighter, out _indexSecondFighter);
             ShowVersusScreen();
-            _arena = new BattleEngine(_fighters.GetFighter(_indexFirstFighter),_fighters.GetFighter(_indexSecondFighter));
+            FighterBase firstFighter = _fighters.GetFighter(_indexFirstFighter).Clone();
+            FighterBase secondFighter = _fighters.GetFighter(_indexSecondFighter).Clone();
+            _arena = new BattleEngine(firstFighter, secondFighter);
             ShowWinner();
         }
 
         private void ShowVersusScreen()
         {
             Console.Clear();
-            
+
             Thread.Sleep(500);
             int positionX = 20;
             int positionY = 5;
             _sprite.DrawNameBarbarian(ref positionX, ref positionY);
             Thread.Sleep(700);
-            
+
             positionX += 30;
             positionY += 2;
             _sprite.DrawTextVersus(ref positionX, ref positionY);
             Thread.Sleep(700);
-            
+
             positionX += 7;
             positionY += 2;
             _sprite.DrawNameFireKnight(ref positionX, ref positionY);
             Thread.Sleep(1000);
-            
+
             Console.Clear();
             _sprite.DrawTextFight(30, 10);
             Thread.Sleep(1500);
@@ -62,20 +59,20 @@ namespace GladiatorFights.UI
         {
             Console.Clear();
             _sprite.DrawSplashScreen();
-            
-            int textX = 55;
-            int textY = 19;
+            int positionX = 55;
+            int positionY = 19;
             Console.CursorVisible = false;
-            
+
             bool isVisible = true;
-            while (!Console.KeyAvailable)
+
+            while (Console.KeyAvailable == false)
             {
-                _sprite.DrawPressAnyKey(textX, textY, isVisible);
+                _sprite.DrawPressAnyKey(positionX, positionY, isVisible);
                 isVisible = !isVisible;
                 Thread.Sleep(400);
             }
-            
-            Console.ReadKey(); // Очистить буфер нажатой клавиши
+
+            Console.ReadKey();
             Console.ForegroundColor = ConsoleColor.White;
             Console.CursorVisible = true;
         }
@@ -86,12 +83,10 @@ namespace GladiatorFights.UI
             _sprite.DrawCharacterCardTable(_fighters.GetAllFighters());
         }
 
-
-
         private void GetNumberFighters(out int indexFirstFighter, out int indexSecondFighter)
         {
+            Console.SetCursorPosition(40,22);
             Console.WriteLine("Кто будет сегодня драться?");
-            
             indexFirstFighter = GetValidIndex("Введите номер бойца:");
             indexSecondFighter = GetValidIndex("Введите номер соперника:");
         }

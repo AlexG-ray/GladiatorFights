@@ -51,5 +51,10 @@ namespace GladiatorFights.Fighters
         {
             return $"Святость";
         }
+
+        public override FighterBase Clone()
+        {
+            return new Paladin(Name, Health, Armor, Damage, _maxSanctity);
+        }
     }
 }

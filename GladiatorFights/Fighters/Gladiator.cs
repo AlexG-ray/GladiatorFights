@@ -41,5 +41,10 @@ namespace GladiatorFights.Fighters
         {
             return "Двойной урон";
         }
+
+        public override FighterBase Clone()
+        {
+            return new Gladiator(Name, Health, Armor, Damage);
+        }
     }
 }

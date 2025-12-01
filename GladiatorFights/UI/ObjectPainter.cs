@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 namespace GladiatorFights.UI
 
 {
@@ -50,6 +49,7 @@ namespace GladiatorFights.UI
         public void DrawPressAnyKey(int positionX, int positionY, bool isVisible)
         {
             Console.SetCursorPosition(positionX, positionY);
+
             if (isVisible)
             {
                 Console.ForegroundColor = ConsoleColor.White;
@@ -58,6 +58,7 @@ namespace GladiatorFights.UI
             {
                 Console.ForegroundColor = ConsoleColor.Black;
             }
+
             Console.Write("Нажмите любую клавишу");
         }
 

@@ -39,5 +39,10 @@ namespace GladiatorFights.Fighters
         {
             return $"Удача";
         }
+
+        public override FighterBase Clone()
+        {
+            return new Rogue(Name, Health, Armor, Damage, _lucky);
+        }
     }
 }

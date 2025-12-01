@@ -48,5 +48,11 @@ namespace GladiatorFights.Fighters
         {
             return $"Огненная атака";
         }
+
+        public override FighterBase Clone()
+        {
+            var clone = new FireKnight(Name, Health, Armor, Damage, _mana);
+            return clone;
+        }
     }
 }

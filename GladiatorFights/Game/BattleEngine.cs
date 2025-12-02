@@ -1,4 +1,5 @@
 ﻿using GladiatorFights;
+using GladiatorFights.Interfaces;
 
 namespace GladiatorFights.Game
 {
@@ -6,9 +7,11 @@ namespace GladiatorFights.Game
     {
         private FighterBase _fighterFirst;
         private FighterBase _fighterSecond;
+        private IBattleLogger _logger;
 
-        public BattleEngine(FighterBase fighterFirst, FighterBase fighterSecond)
+        public BattleEngine(FighterBase fighterFirst, FighterBase fighterSecond, IBattleLogger logger)
         {
+            logger = _logger;
             _fighterFirst = fighterFirst;
             _fighterSecond = fighterSecond;
             Winner = GetWinner();

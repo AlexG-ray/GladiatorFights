@@ -41,7 +41,9 @@
     <Compile Include="Fighters\Gladiator.cs" />
     <Compile Include="Fighters\Rogue.cs" />
     <Compile Include="Game\BattleEngine.cs" />
+    <Compile Include="Game\BattleLogger.cs" />
     <Compile Include="Game\FighterList.cs" />
+    <Compile Include="Interfaces\IBattleLogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IAttacker.cs" />

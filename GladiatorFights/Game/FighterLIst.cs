@@ -11,12 +11,12 @@ namespace GladiatorFights.Game
         {
             _fighters = new List<FighterBase>()
             {
-                new Barbarian("Nomad", 100, 30, 25, 50),
-                new FireKnight("Warlord",90, 80, 10, 40),
-                new Gladiator("Gladus", 100, 80 , 25),
-                new Monk("Hermit", 80, 30, 20, 40),
-                new Paladin("Crusader", 90, 30, 15, 40 ),
-                new Rogue( "Bandit", 70, 20, 20, 50)
+                new Barbarian("Nomad", 100, 20, 30, 50),
+                new FireKnight("Warlord", 90, 25, 35, 40),
+                new Gladiator("Gladus", 100, 30, 40),
+                new Monk("Hermit", 80, 15, 25, 40),
+                new Paladin("Crusader", 90, 20, 30, 40),
+                new Rogue("Bandit", 70, 10, 30, 50)
             };
         }
 
@@ -34,5 +34,8 @@ namespace GladiatorFights.Game
 
         public List<FighterBase> GetAllFighters() =>
              _fighters;
+
+        public int GetIndexByName(string name) =>
+            _fighters.FindIndex(n => n.Name == name);
     }
 }

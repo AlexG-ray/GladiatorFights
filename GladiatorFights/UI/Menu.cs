@@ -1,4 +1,5 @@
 ﻿using GladiatorFights.Game;
+using GladiatorFights.Interfaces;
 using System;
 using System.Threading;
 
@@ -8,12 +9,14 @@ namespace GladiatorFights.UI
     {
         private FighterList _fighters;
         private BattleEngine _arena;
+        private IBattleLogger _logger;
         private ObjectPainter _sprite;
         private int _indexFirstFighter;
         private int _indexSecondFighter;
 
         public Menu()
         {
+
             _sprite = new ObjectPainter();
             _fighters = new FighterList();
         }
@@ -23,21 +26,22 @@ namespace GladiatorFights.UI
             ShowSplashScreen();
             ShowAllFighters();
             GetNumberFighters(out _indexFirstFighter, out _indexSecondFighter);
-            ShowVersusScreen();
+            ShowVersusScreen(_indexFirstFighter,_indexSecondFighter);
             FighterBase firstFighter = _fighters.GetFighter(_indexFirstFighter).Clone();
             FighterBase secondFighter = _fighters.GetFighter(_indexSecondFighter).Clone();
             _arena = new BattleEngine(firstFighter, secondFighter);
+            // battleLogger
             ShowWinner();
         }
 
-        private void ShowVersusScreen()
+        private void ShowVersusScreen(int indexFirstFighter, int indexSecondFighter)
         {
             Console.Clear();
 
             Thread.Sleep(500);
             int positionX = 20;
             int positionY = 5;
-            _sprite.DrawNameBarbarian(ref positionX, ref positionY);
+            _sprite.DrawFighterNameByIndex(indexFirstFighter,ref positionX,ref positionY);
             Thread.Sleep(700);
 
             positionX += 30;
@@ -47,7 +51,7 @@ namespace GladiatorFights.UI
 
             positionX += 7;
             positionY += 2;
-            _sprite.DrawNameFireKnight(ref positionX, ref positionY);
+            _sprite.DrawFighterNameByIndex(indexSecondFighter,ref positionX,ref positionY);
             Thread.Sleep(1000);
 
             Console.Clear();
@@ -126,7 +130,14 @@ namespace GladiatorFights.UI
         private void ShowWinner()
         {
             Console.Clear();
-            Console.WriteLine($"{_arena.Winner.Name}");
+            int positionX = 25;
+            int positionY = 3;
+            _sprite.DrawWinnerScreen(ref positionX,ref  positionY);
+            
+            int indexWinner = _fighters.GetIndexByName(_arena.Winner.Name);
+            positionX += 15;
+            positionY += 5;
+            _sprite.DrawFighterNameByIndex(indexWinner, ref positionX , ref positionY);
             Console.ReadKey();
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 namespace GladiatorFights.UI
 
 {
@@ -7,10 +8,35 @@ namespace GladiatorFights.UI
     {
         private int _windowSizeX = 110;
         private int _windowsSizeY = 270;
+        
+        private static Action<int, int>[] s_nameDrawers;
 
         public ObjectPainter()
         {
             Console.SetWindowSize(_windowSizeX, _windowsSizeY);
+        }
+
+        public void DrawFighterNameByIndex(int fighterIndex, ref int positionX, ref int positionY)
+        {
+            if (s_nameDrawers == null)
+            {
+                s_nameDrawers = new Action<int, int>[]
+                {
+                    DrawNameBarbarian,      
+                    DrawNameFireKnight,    
+                    DrawNameGladiator,      
+                    DrawNameMonk,           
+                    DrawNamePaladin,       
+                    DrawNameRogue         
+                };
+            }
+
+            if (fighterIndex >= 0 && fighterIndex < s_nameDrawers.Length)
+            {
+                int startY = positionY;
+                s_nameDrawers[fighterIndex](positionX, positionY);
+                positionY = startY + 5;
+            }
         }
 
         public void DrawSplashScreen()
@@ -123,9 +149,29 @@ namespace GladiatorFights.UI
             Console.Write(border);
         }
 
-        public void DrawWinnerScreen()
+        public void DrawWinnerScreen(int positionX, int positionY)
         {
+            Console.SetCursorPosition(positionX, positionY++);
+            Console.WriteLine(":::       ::: ::::::::::: ::::    ::: ::::    ::: :::::::::: :::::::::  ");
+            Console.SetCursorPosition(positionX, positionY++);
+            Console.WriteLine(":+:       :+:     :+:     :+:+:   :+: :+:+:   :+: :+:        :+:    :+: ");
+            Console.SetCursorPosition(positionX, positionY++);
+            Console.WriteLine("+:+       +:+     +:+     :+:+:+  +:+ :+:+:+  +:+ +:+        +:+    +:+ ");
+            Console.SetCursorPosition(positionX, positionY++);
+            Console.WriteLine("+#+  +:+  +#+     +#+     +#+ +:+ +#+ +#+ +:+ +#+ +#++:++#   +#++:++#:  ");
+            Console.SetCursorPosition(positionX, positionY++);
+            Console.WriteLine("+#+ +#+#+ +#+     +#+     +#+  +#+#+# +#+  +#+#+# +#+        +#+    +#+ ");
+            Console.SetCursorPosition(positionX, positionY++);
+            Console.WriteLine(" #+#+# #+#+#      #+#     #+#   #+#+# #+#   #+#+# #+#        #+#    #+# ");
+            Console.SetCursorPosition(positionX, positionY++);
+            Console.WriteLine("  ###   ###   ########### ###    #### ###    #### ########## ###    ### ");
+        }
 
+        public void DrawWinnerScreen(ref int positionX, ref int positionY)
+        {
+            int startY = positionY;
+            DrawWinnerScreen(positionX, positionY);
+            positionY = startY + 7;
         }
 
         public void DrawNameBarbarian(int positionX, int positionY)

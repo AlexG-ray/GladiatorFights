@@ -1,38 +1,48 @@
 ﻿using GladiatorFights.Interfaces;
 using System;
+using System.Threading;
 
 namespace GladiatorFights.Game
 {
-    internal class BattleLogger : IBattleLogger 
+    internal class BattleLogger : IBattleLogger
     {
-        private BattleEngine _engine;
-
-        public BattleLogger(BattleEngine engine)
+        public void LogAbility(FighterBase fighter)
         {
-            _engine = engine;
-        }
+            string ability = fighter.GetUsedAbilityDescription();
 
-        public void LogAbility(FighterBase fighter, string ability)
-        {
-            throw new NotImplementedException();
+            if (ability != null)
+            {
+                ColoringText($"{fighter.Name} применяет способность: {ability}!", 400, ConsoleColor.Cyan);
+            }
         }
 
         public void LogAttack(FighterBase attacker, FighterBase target, int damage)
         {
-            throw new NotImplementedException();
+            ColoringText($"{attacker.Name} наносит {target.Name} урон {damage}.", 400, ConsoleColor.Yellow);
         }
 
-        public void LogStats(FighterBase firstFighter, FighterBase secondFighter)
+        public void LogStats(FighterBase target)
         {
-            throw new NotImplementedException();
+            ColoringText($"Осталось HP:{target.Health} у {target.Name}.\n", 400, ConsoleColor.DarkYellow);
         }
 
-        public void ShowBattleProgress()
+        public void LogDead(FighterBase loser)
         {
-
+            ColoringText($"{loser.Name} - мертв!!!", 1000, ConsoleColor.DarkRed);
         }
 
+        public void LogDamage(FighterBase target, int damage)
+        {
+            ColoringText($"{target.Name} получает {damage} урона.", 400, ConsoleColor.DarkYellow);
+        }
 
-        
+        private void ColoringText(string text, int delayTime = 0, ConsoleColor color = ConsoleColor.Gray)
+        {
+            ConsoleColor defaultColor = Console.ForegroundColor;
+            Console.ForegroundColor = color;
+            Console.WriteLine(text);
+            Thread.Sleep(delayTime);
+            Console.ForegroundColor = defaultColor;
+        }
     }
 }

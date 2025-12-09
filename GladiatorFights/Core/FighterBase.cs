@@ -27,6 +27,8 @@ namespace GladiatorFights
 
         public int Damage { get; protected set; }
 
+        public int ReceivedDamage { get; protected set; }
+
         public bool IsAlive => Health > 0;
 
         public void Attack(IDamageable target)
@@ -47,6 +49,7 @@ namespace GladiatorFights
         {
             damage = Math.Max(damage - Armor, 0);
             Health = Math.Max(Health - damage, 0);
+            ReceivedDamage = damage;
         }
 
         protected virtual void OnAttackDenied(IDamageable target) { }
@@ -72,6 +75,16 @@ namespace GladiatorFights
         public virtual string GetSpecialAbilities()
         {
             return "Обычный боец";
+        }
+
+        public virtual string GetUsedAbilityDescription()
+        {
+            if (TypeAttack != s_standardAttack)
+            {
+                return TypeAttack.Description;
+            }
+
+            return null;
         }
 
         public abstract FighterBase Clone();

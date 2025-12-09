@@ -9,14 +9,14 @@ namespace GladiatorFights.UI
     {
         private FighterList _fighters;
         private BattleEngine _arena;
-        private IBattleLogger _logger;
+        private BattleLogger _logger;
         private ObjectPainter _sprite;
         private int _indexFirstFighter;
         private int _indexSecondFighter;
 
         public Menu()
         {
-
+            _logger = new BattleLogger();
             _sprite = new ObjectPainter();
             _fighters = new FighterList();
         }
@@ -26,11 +26,12 @@ namespace GladiatorFights.UI
             ShowSplashScreen();
             ShowAllFighters();
             GetNumberFighters(out _indexFirstFighter, out _indexSecondFighter);
-            ShowVersusScreen(_indexFirstFighter,_indexSecondFighter);
+            ShowVersusScreen(_indexFirstFighter, _indexSecondFighter);
             FighterBase firstFighter = _fighters.GetFighter(_indexFirstFighter).Clone();
             FighterBase secondFighter = _fighters.GetFighter(_indexSecondFighter).Clone();
-            _arena = new BattleEngine(firstFighter, secondFighter);
-            // battleLogger
+            _arena = new BattleEngine(firstFighter, secondFighter, _logger);
+            Console.Clear();
+            _arena.StarFight();
             ShowWinner();
         }
 
@@ -41,7 +42,7 @@ namespace GladiatorFights.UI
             Thread.Sleep(500);
             int positionX = 20;
             int positionY = 5;
-            _sprite.DrawFighterNameByIndex(indexFirstFighter,ref positionX,ref positionY);
+            _sprite.DrawFighterNameByIndex(indexFirstFighter, ref positionX, ref positionY);
             Thread.Sleep(700);
 
             positionX += 30;
@@ -51,7 +52,7 @@ namespace GladiatorFights.UI
 
             positionX += 7;
             positionY += 2;
-            _sprite.DrawFighterNameByIndex(indexSecondFighter,ref positionX,ref positionY);
+            _sprite.DrawFighterNameByIndex(indexSecondFighter, ref positionX, ref positionY);
             Thread.Sleep(1000);
 
             Console.Clear();
@@ -89,7 +90,7 @@ namespace GladiatorFights.UI
 
         private void GetNumberFighters(out int indexFirstFighter, out int indexSecondFighter)
         {
-            Console.SetCursorPosition(40,22);
+            Console.SetCursorPosition(40, 22);
             Console.WriteLine("Кто будет сегодня драться?");
             indexFirstFighter = GetValidIndex("Введите номер бойца:");
             indexSecondFighter = GetValidIndex("Введите номер соперника:");
@@ -132,12 +133,12 @@ namespace GladiatorFights.UI
             Console.Clear();
             int positionX = 25;
             int positionY = 3;
-            _sprite.DrawWinnerScreen(ref positionX,ref  positionY);
-            
+            _sprite.DrawWinnerScreen(ref positionX, ref positionY);
+
             int indexWinner = _fighters.GetIndexByName(_arena.Winner.Name);
             positionX += 15;
             positionY += 5;
-            _sprite.DrawFighterNameByIndex(indexWinner, ref positionX , ref positionY);
+            _sprite.DrawFighterNameByIndex(indexWinner, ref positionX, ref positionY);
             Console.ReadKey();
         }
     }

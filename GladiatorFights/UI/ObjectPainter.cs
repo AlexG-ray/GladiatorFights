@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 namespace GladiatorFights.UI
 
 {
@@ -8,7 +7,7 @@ namespace GladiatorFights.UI
     {
         private int _windowSizeX = 110;
         private int _windowsSizeY = 270;
-        
+
         private static Action<int, int>[] s_nameDrawers;
 
         public ObjectPainter()
@@ -22,12 +21,12 @@ namespace GladiatorFights.UI
             {
                 s_nameDrawers = new Action<int, int>[]
                 {
-                    DrawNameBarbarian,      
-                    DrawNameFireKnight,    
-                    DrawNameGladiator,      
-                    DrawNameMonk,           
-                    DrawNamePaladin,       
-                    DrawNameRogue         
+                    DrawNameBarbarian,
+                    DrawNameFireKnight,
+                    DrawNameGladiator,
+                    DrawNameMonk,
+                    DrawNamePaladin,
+                    DrawNameRogue
                 };
             }
 
@@ -72,7 +71,7 @@ namespace GladiatorFights.UI
             Console.SetCursorPosition(positionX, positionY++);
         }
 
-        public void DrawPressAnyKey(int positionX, int positionY, bool isVisible)
+        public void DrawPressAnyKey(string text, int positionX, int positionY, bool isVisible)
         {
             Console.SetCursorPosition(positionX, positionY);
 
@@ -85,7 +84,7 @@ namespace GladiatorFights.UI
                 Console.ForegroundColor = ConsoleColor.Black;
             }
 
-            Console.Write("Нажмите любую клавишу");
+            Console.Write(text);
         }
 
         public void DrawCharacterCardTable(List<FighterBase> fighters)

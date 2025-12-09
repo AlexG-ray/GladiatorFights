@@ -1,5 +1,6 @@
 ﻿using GladiatorFights.Game;
 using GladiatorFights.Interfaces;
+using GladiatorFights.Utils;
 using System;
 using System.Threading;
 
@@ -9,7 +10,7 @@ namespace GladiatorFights.UI
     {
         private FighterList _fighters;
         private BattleEngine _arena;
-        private BattleLogger _logger;
+        private IBattleLogger _logger;
         private ObjectPainter _sprite;
         private int _indexFirstFighter;
         private int _indexSecondFighter;
@@ -23,21 +24,26 @@ namespace GladiatorFights.UI
 
         public void Run()
         {
-            ShowSplashScreen();
-            ShowAllFighters();
-            GetNumberFighters(out _indexFirstFighter, out _indexSecondFighter);
-            ShowVersusScreen(_indexFirstFighter, _indexSecondFighter);
-            FighterBase firstFighter = _fighters.GetFighter(_indexFirstFighter).Clone();
-            FighterBase secondFighter = _fighters.GetFighter(_indexSecondFighter).Clone();
-            _arena = new BattleEngine(firstFighter, secondFighter, _logger);
-            Console.Clear();
-            _arena.StarFight();
-            ShowWinner();
-        }
+            bool isWork = true;
+
+            do
+            {
+                ShowSplashScreen();
+                ShowAllFighters();
+                GetNumberFighters(out _indexFirstFighter, out _indexSecondFighter);
+                ShowVersusScreen(_indexFirstFighter, _indexSecondFighter);
+                FighterBase firstFighter = _fighters.GetFighter(_indexFirstFighter).Clone();
+                FighterBase secondFighter = _fighters.GetFighter(_indexSecondFighter).Clone();
+                _arena = new BattleEngine(firstFighter, secondFighter, _logger);
+                Console.Clear();
+                _arena.StarFight();
+                ShowWinner(out isWork);
+            } while (isWork);        }
 
         private void ShowVersusScreen(int indexFirstFighter, int indexSecondFighter)
         {
             Console.Clear();
+            Console.CursorVisible = false;
 
             Thread.Sleep(500);
             int positionX = 20;
@@ -72,7 +78,7 @@ namespace GladiatorFights.UI
 
             while (Console.KeyAvailable == false)
             {
-                _sprite.DrawPressAnyKey(positionX, positionY, isVisible);
+                _sprite.DrawPressAnyKey("Нажмите любую кнопку",positionX, positionY, isVisible);
                 isVisible = !isVisible;
                 Thread.Sleep(400);
             }
@@ -128,7 +134,7 @@ namespace GladiatorFights.UI
             }
         }
 
-        private void ShowWinner()
+        private void ShowWinner(out bool isWork)
         {
             Console.Clear();
             int positionX = 25;
@@ -139,7 +145,41 @@ namespace GladiatorFights.UI
             positionX += 15;
             positionY += 5;
             _sprite.DrawFighterNameByIndex(indexWinner, ref positionX, ref positionY);
-            Console.ReadKey();
+            
+            positionY += 8;
+            positionX = 30;
+            Console.SetCursorPosition(positionX, positionY);
+
+            ConsoleKey RestartKey = ConsoleKey.Enter;
+            ConsoleKey ExitKey = ConsoleKey.Escape;
+            Console.WriteLine($"Нажмите {RestartKey} для перезапуска или {ExitKey} для выхода");
+            
+            Console.CursorVisible = false;
+            ConsoleKeyInfo keyInfo;
+            
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(true);
+            }
+            
+            while (true)
+            {
+                keyInfo = Console.ReadKey(true);
+                
+                if (keyInfo.Key == RestartKey)
+                {
+                    isWork = true;
+                    break;
+                }
+                
+                if (keyInfo.Key == ExitKey)
+                {
+                    isWork = false;
+                    break;
+                }
+            }
+            
+            Console.CursorVisible = true;
         }
     }
 }

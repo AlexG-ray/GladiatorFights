@@ -1,6 +1,5 @@
 ﻿using GladiatorFights.Game;
 using GladiatorFights.Interfaces;
-using GladiatorFights.Utils;
 using System;
 using System.Threading;
 
@@ -38,7 +37,8 @@ namespace GladiatorFights.UI
                 Console.Clear();
                 _arena.StarFight();
                 ShowWinner(out isWork);
-            } while (isWork);        }
+            } while (isWork);
+        }
 
         private void ShowVersusScreen(int indexFirstFighter, int indexSecondFighter)
         {

@@ -38,13 +38,12 @@ namespace GladiatorFights.Game
                 _logger.LogStats(_fighterFirst);
             }
 
-            if (_fighterFirst.IsAlive == true)
+            if (_fighterFirst.IsAlive)
             {
                 Winner = _fighterFirst;
                 _logger.LogDead(_fighterSecond);
             }
-
-            if (_fighterSecond.IsAlive == true)
+            else if (_fighterSecond.IsAlive)
             {
                 Winner = _fighterSecond;
                 _logger.LogDead(_fighterFirst);

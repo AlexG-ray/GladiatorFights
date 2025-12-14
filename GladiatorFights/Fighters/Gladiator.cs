@@ -7,6 +7,7 @@ namespace GladiatorFights.Fighters
     {
         private readonly IAttackStrategy _tripleAttack;
         private int _impactCounter;
+        private int _skillActivationHitCount = 3;
 
         public Gladiator(string name, int health, int armor, int damage)
             : base(name, health, armor, damage)
@@ -29,7 +30,7 @@ namespace GladiatorFights.Fighters
         {
             _impactCounter++;
 
-            if (_impactCounter % 3 == 0)
+            if (_impactCounter % _skillActivationHitCount == 0)
             {
                 SetAttackStrategy(_tripleAttack);
             }
@@ -41,7 +42,7 @@ namespace GladiatorFights.Fighters
 
         protected override void AfterAttack(IDamageable target)
         {
-            if (_impactCounter >= 3)
+            if (_impactCounter >= _skillActivationHitCount)
             {
                 _impactCounter = 0;
             }

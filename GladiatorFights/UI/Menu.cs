@@ -145,40 +145,40 @@ namespace GladiatorFights.UI
             positionX += 15;
             positionY += 5;
             _sprite.DrawFighterNameByIndex(indexWinner, ref positionX, ref positionY);
-            
+
             positionY += 8;
             positionX = 30;
             Console.SetCursorPosition(positionX, positionY);
 
-            ConsoleKey RestartKey = ConsoleKey.Enter;
-            ConsoleKey ExitKey = ConsoleKey.Escape;
-            Console.WriteLine($"Нажмите {RestartKey} для перезапуска или {ExitKey} для выхода");
-            
+            ConsoleKey restartKey = ConsoleKey.Enter;
+            ConsoleKey exitKey = ConsoleKey.Escape;
+            Console.WriteLine($"Нажмите {restartKey} для перезапуска или {exitKey} для выхода");
+
             Console.CursorVisible = false;
             ConsoleKeyInfo keyInfo;
-            
+
             while (Console.KeyAvailable)
             {
                 Console.ReadKey(true);
             }
-            
+
             while (true)
             {
                 keyInfo = Console.ReadKey(true);
-                
-                if (keyInfo.Key == RestartKey)
+
+                if (keyInfo.Key == restartKey)
                 {
                     isWork = true;
                     break;
                 }
-                
-                if (keyInfo.Key == ExitKey)
+
+                if (keyInfo.Key == exitKey)
                 {
                     isWork = false;
                     break;
                 }
             }
-            
+
             Console.CursorVisible = true;
         }
     }

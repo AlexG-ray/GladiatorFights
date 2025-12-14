@@ -1,6 +1,6 @@
-﻿using GladiatorFights.Interfaces;
+﻿using System;
+using GladiatorFights.Interfaces;
 using GladiatorFights.Strategies;
-using System;
 
 namespace GladiatorFights.Fighters
 {
@@ -10,8 +10,8 @@ namespace GladiatorFights.Fighters
         private int _sanctity;
         private int _maxSanctity;
 
-        public Paladin(string name, int health, int armor, int damage, int maxSanctity) :
-            base(name, health, armor, damage)
+        public Paladin(string name, int health, int armor, int damage, int maxSanctity)
+            : base(name, health, armor, damage)
         {
             _sanctity = 0;
             _maxSanctity = maxSanctity;
@@ -25,6 +25,16 @@ namespace GladiatorFights.Fighters
             _sanctity = Math.Min(_sanctity, _maxSanctity);
         }
 
+        public override string GetSpecialAbilities()
+        {
+            return $"Святость";
+        }
+
+        public override FighterBase Clone()
+        {
+            return new Paladin(Name, Health, Armor, Damage, _maxSanctity);
+        }
+
         protected override void BeforeAttack(IDamageable target)
         {
             if (_sanctity >= _maxSanctity)
@@ -33,7 +43,7 @@ namespace GladiatorFights.Fighters
             }
             else
             {
-                SetAttackStrategy(s_standardAttack);
+                SetAttackStrategy(S_StandardAttack);
             }
         }
 
@@ -45,16 +55,6 @@ namespace GladiatorFights.Fighters
                 _sanctity = 0;
                 Health += healAmount;
             }
-        }
-
-        public override string GetSpecialAbilities()
-        {
-            return $"Святость";
-        }
-
-        public override FighterBase Clone()
-        {
-            return new Paladin(Name, Health, Armor, Damage, _maxSanctity);
         }
     }
 }

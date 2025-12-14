@@ -1,5 +1,5 @@
-﻿using GladiatorFights.Fighters;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using GladiatorFights.Fighters;
 
 namespace GladiatorFights.Game
 {
@@ -16,7 +16,7 @@ namespace GladiatorFights.Game
                 new Gladiator("Gladus", 100, 30, 40),
                 new Monk("Hermit", 80, 15, 25, 40),
                 new Paladin("Crusader", 90, 20, 30, 40),
-                new Rogue("Bandit", 70, 10, 30, 50)
+                new Rogue("Bandit", 70, 10, 30, 50),
             };
         }
 

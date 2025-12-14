@@ -6,7 +6,7 @@ namespace GladiatorFights
 {
     internal abstract class FighterBase : IAttacker, IDamageable
     {
-        protected static readonly StandardAttackStrategy s_standardAttack = new StandardAttackStrategy();
+        protected static readonly StandardAttackStrategy S_StandardAttack = new StandardAttackStrategy();
 
         protected FighterBase(string name, int health, int armor, int damage)
         {
@@ -14,10 +14,8 @@ namespace GladiatorFights
             Health = health;
             Armor = armor;
             Damage = damage;
-            TypeAttack = s_standardAttack;
+            TypeAttack = S_StandardAttack;
         }
-
-        protected IAttackStrategy TypeAttack { get; private set; }
 
         public string Name { get; protected set; }
 
@@ -30,6 +28,8 @@ namespace GladiatorFights
         public int ReceivedDamage { get; protected set; }
 
         public bool IsAlive => Health > 0;
+
+        protected IAttackStrategy TypeAttack { get; private set; }
 
         public void Attack(IDamageable target)
         {
@@ -52,6 +52,23 @@ namespace GladiatorFights
             ReceivedDamage = damage;
         }
 
+        public virtual string GetSpecialAbilities()
+        {
+            return "Обычный боец";
+        }
+
+        public virtual string GetUsedAbilityDescription()
+        {
+            if (TypeAttack != S_StandardAttack)
+            {
+                return TypeAttack.Description;
+            }
+
+            return null;
+        }
+
+        public abstract FighterBase Clone();
+
         protected virtual void OnAttackDenied(IDamageable target) { }
 
         protected virtual void ApplyDamage(IDamageable target, int damage) =>
@@ -71,22 +88,5 @@ namespace GladiatorFights
         {
             TypeAttack = typeAttack;
         }
-
-        public virtual string GetSpecialAbilities()
-        {
-            return "Обычный боец";
-        }
-
-        public virtual string GetUsedAbilityDescription()
-        {
-            if (TypeAttack != s_standardAttack)
-            {
-                return TypeAttack.Description;
-            }
-
-            return null;
-        }
-
-        public abstract FighterBase Clone();
     }
 }

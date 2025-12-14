@@ -29,7 +29,9 @@ namespace GladiatorFights.Game
                 _logger.LogStats(_fighterSecond);
 
                 if (_fighterSecond.IsAlive == false)
+                {
                     break;
+                }
 
                 _logger.LogAttack(_fighterSecond, _fighterFirst, _fighterSecond.Damage);
                 _fighterSecond.Attack(_fighterFirst);

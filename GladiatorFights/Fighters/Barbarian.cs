@@ -1,6 +1,6 @@
-﻿using GladiatorFights.Interfaces;
+﻿using System;
+using GladiatorFights.Interfaces;
 using GladiatorFights.Strategies;
-using System;
 
 namespace GladiatorFights.Fighters
 {
@@ -11,8 +11,8 @@ namespace GladiatorFights.Fighters
         private int _fullRage;
         private int _healingAmount;
 
-        public Barbarian(string name, int health, int armor, int damage, int fullRage) :
-            base(name, health, armor, damage)
+        public Barbarian(string name, int health, int armor, int damage, int fullRage)
+            : base(name, health, armor, damage)
         {
             _rageAttack = new RageAttackStrategy();
             _rage = 0;
@@ -21,6 +21,7 @@ namespace GladiatorFights.Fighters
         }
 
         public int Rage => _rage;
+
         public int FullRage => _fullRage;
 
         public override void TakeDamage(int damage)
@@ -31,6 +32,16 @@ namespace GladiatorFights.Fighters
             _rage = Math.Min(_rage, _fullRage);
         }
 
+        public override FighterBase Clone()
+        {
+            return new Barbarian(Name, Health, Armor, Damage, _fullRage);
+        }
+
+        public override string GetSpecialAbilities()
+        {
+            return $"Ярость";
+        }
+
         protected override void BeforeAttack(IDamageable target)
         {
             if (_rage >= _fullRage)
@@ -39,7 +50,7 @@ namespace GladiatorFights.Fighters
             }
             else
             {
-                SetAttackStrategy(s_standardAttack);
+                SetAttackStrategy(S_StandardAttack);
             }
         }
 
@@ -50,16 +61,6 @@ namespace GladiatorFights.Fighters
                 Health += _healingAmount;
                 _rage = 0;
             }
-        }
-
-        public override string GetSpecialAbilities()
-        {
-            return $"Ярость";
-        }
-
-        public override FighterBase Clone()
-        {
-            return new Barbarian(Name, Health, Armor, Damage, _fullRage);
         }
     }
 }

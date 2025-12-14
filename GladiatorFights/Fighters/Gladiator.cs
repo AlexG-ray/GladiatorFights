@@ -25,7 +25,7 @@ namespace GladiatorFights.Fighters
             }
             else
             {
-                SetAttackStrategy(s_standardAttack);
+                SetAttackStrategy(S_StandardAttack);
             }
         }
 

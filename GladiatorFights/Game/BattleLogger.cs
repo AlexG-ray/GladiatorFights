@@ -1,6 +1,6 @@
-﻿using GladiatorFights.Interfaces;
-using System;
+﻿using System;
 using System.Threading;
+using GladiatorFights.Interfaces;
 
 namespace GladiatorFights.Game
 {

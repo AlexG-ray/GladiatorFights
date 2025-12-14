@@ -8,11 +8,21 @@ namespace GladiatorFights.Fighters
         private readonly IAttackStrategy _tripleAttack;
         private int _impactCounter;
 
-        public Gladiator(string name, int health, int armor, int damage) :
-            base(name, health, armor, damage)
+        public Gladiator(string name, int health, int armor, int damage)
+            : base(name, health, armor, damage)
         {
             _impactCounter = 0;
             _tripleAttack = new DoubleAttackStrategy();
+        }
+
+        public override string GetSpecialAbilities()
+        {
+            return "Двойной урон";
+        }
+
+        public override FighterBase Clone()
+        {
+            return new Gladiator(Name, Health, Armor, Damage);
         }
 
         protected override void BeforeAttack(IDamageable target)
@@ -35,16 +45,6 @@ namespace GladiatorFights.Fighters
             {
                 _impactCounter = 0;
             }
-        }
-
-        public override string GetSpecialAbilities()
-        {
-            return "Двойной урон";
-        }
-
-        public override FighterBase Clone()
-        {
-            return new Gladiator(Name, Health, Armor, Damage);
         }
     }
 }

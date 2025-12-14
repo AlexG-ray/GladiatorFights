@@ -2,7 +2,8 @@
 {
     internal interface IDamageable
     {
+        bool IsAlive { get; }
+
         void TakeDamage(int damage);
-        bool IsAlive {  get; }
     }
 }

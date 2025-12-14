@@ -20,6 +20,17 @@ namespace GladiatorFights.Fighters
             _fireballAttack = new FireballAttackStrategy();
         }
 
+        public override string GetSpecialAbilities()
+        {
+            return $"Огненная атака";
+        }
+
+        public override FighterBase Clone()
+        {
+            var clone = new FireKnight(Name, Health, Armor, Damage, _mana);
+            return clone;
+        }
+
         protected override void BeforeAttack(IDamageable target)
         {
             if (_mana >= _manaCostFireball)
@@ -42,17 +53,6 @@ namespace GladiatorFights.Fighters
             }
 
             _mana += _regenerationMana;
-        }
-
-        public override string GetSpecialAbilities()
-        {
-            return $"Огненная атака";
-        }
-
-        public override FighterBase Clone()
-        {
-            var clone = new FireKnight(Name, Health, Armor, Damage, _mana);
-            return clone;
         }
     }
 }

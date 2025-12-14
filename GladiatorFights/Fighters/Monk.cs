@@ -20,13 +20,6 @@ namespace GladiatorFights.Fighters
             }
         }
 
-        private bool TryDodge()
-        {
-            int roll = UserUtils.GenerateRandomNumber(1,101);
-
-            return roll <= _agility;
-        }
-
         public override string GetSpecialAbilities()
         {
             return $"Уклонение";
@@ -35,6 +28,13 @@ namespace GladiatorFights.Fighters
         public override FighterBase Clone()
         {
             return new Monk(Name, Health, Armor, Damage, _agility);
+        }
+
+        private bool TryDodge()
+        {
+            int roll = UserUtils.GenerateRandomNumber(1, 101);
+
+            return roll <= _agility;
         }
     }
 }

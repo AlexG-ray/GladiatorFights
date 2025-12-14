@@ -26,7 +26,7 @@ namespace GladiatorFights.UI
                     DrawNameGladiator,
                     DrawNameMonk,
                     DrawNamePaladin,
-                    DrawNameRogue
+                    DrawNameRogue,
                 };
             }
 

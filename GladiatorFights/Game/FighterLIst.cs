@@ -36,6 +36,6 @@ namespace GladiatorFights.Game
              _fighters;
 
         public int GetIndexByName(string name) =>
-            _fighters.FindIndex(n => n.Name == name);
+            _fighters.FindIndex(figter => figter.Name == name);
     }
 }

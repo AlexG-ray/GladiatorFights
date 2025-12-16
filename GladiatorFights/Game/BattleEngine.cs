@@ -1,4 +1,6 @@
-﻿using GladiatorFights;
+﻿using System.Runtime.InteropServices;
+
+using GladiatorFights;
 using GladiatorFights.Interfaces;
 
 namespace GladiatorFights.Game
@@ -22,22 +24,14 @@ namespace GladiatorFights.Game
         {
             while (_fighterFirst.IsAlive && _fighterSecond.IsAlive)
             {
-                _logger.LogAttack(_fighterFirst, _fighterSecond, _fighterFirst.Damage);
-                _fighterFirst.Attack(_fighterSecond);
-                _logger.LogAbility(_fighterFirst);
-                _logger.LogDamage(_fighterSecond, _fighterSecond.ReceivedDamage);
-                _logger.LogStats(_fighterSecond);
+                PerformAttack(_fighterFirst, _fighterSecond);
 
                 if (_fighterSecond.IsAlive == false)
                 {
                     break;
                 }
 
-                _logger.LogAttack(_fighterSecond, _fighterFirst, _fighterSecond.Damage);
-                _fighterSecond.Attack(_fighterFirst);
-                _logger.LogAbility(_fighterSecond);
-                _logger.LogDamage(_fighterFirst, _fighterFirst.ReceivedDamage);
-                _logger.LogStats(_fighterFirst);
+                PerformAttack(_fighterSecond, _fighterFirst);
             }
 
             if (_fighterFirst.IsAlive)
@@ -50,6 +44,15 @@ namespace GladiatorFights.Game
                 Winner = _fighterSecond;
                 _logger.LogDead(_fighterFirst);
             }
+        }
+
+        private void PerformAttack(FighterBase attaker, FighterBase assailed)
+        {
+            _logger.LogAttack(attaker, assailed, attaker.Damage);
+            attaker.Attack(assailed);
+            _logger.LogAbility(attaker);
+            _logger.LogDamage(assailed, assailed.ReceivedDamage);
+            _logger.LogStats(assailed);
         }
     }
 }

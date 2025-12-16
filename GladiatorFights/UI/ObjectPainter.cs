@@ -5,7 +5,7 @@ namespace GladiatorFights.UI
 {
     internal class ObjectPainter
     {
-        private static Action<int, int>[] s_nameDrawers;
+        private Action<int, int>[] _nameDrawers;
         private int _windowSizeX = 110;
         private int _windowsSizeY = 270;
 
@@ -16,9 +16,9 @@ namespace GladiatorFights.UI
 
         public void DrawFighterNameByIndex(int fighterIndex, ref int positionX, ref int positionY)
         {
-            if (s_nameDrawers == null)
+            if (_nameDrawers == null)
             {
-                s_nameDrawers = new Action<int, int>[]
+                _nameDrawers = new Action<int, int>[]
                 {
                     DrawNameBarbarian,
                     DrawNameFireKnight,
@@ -29,10 +29,10 @@ namespace GladiatorFights.UI
                 };
             }
 
-            if (fighterIndex >= 0 && fighterIndex < s_nameDrawers.Length)
+            if (fighterIndex >= 0 && fighterIndex < _nameDrawers.Length)
             {
                 int startY = positionY;
-                s_nameDrawers[fighterIndex](positionX, positionY);
+                _nameDrawers[fighterIndex](positionX, positionY);
                 positionY = startY + 5;
             }
         }

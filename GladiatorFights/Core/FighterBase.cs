@@ -7,10 +7,9 @@ namespace GladiatorFights
 {
     internal abstract class FighterBase : IAttacker, IDamageable
     {
-        protected static readonly StandardAttackStrategy StandardAttack = new StandardAttackStrategy();
-
         protected FighterBase(string name, int health, int armor, int damage)
         {
+            StandardAttack = new StandardAttackStrategy();
             Name = name;
             Health = health;
             Armor = armor;
@@ -29,6 +28,8 @@ namespace GladiatorFights
         public int ReceivedDamage { get; protected set; }
 
         public bool IsAlive => Health > 0;
+
+        protected StandardAttackStrategy StandardAttack { get; set; }
 
         protected IAttackStrategy TypeAttack { get; private set; }
 
@@ -60,7 +61,7 @@ namespace GladiatorFights
 
         public virtual string GetUsedAbilityDescription()
         {
-            if (TypeAttack != StandardAttack)
+            if (TypeAttack is StandardAttackStrategy == false)
             {
                 return TypeAttack.Description;
             }

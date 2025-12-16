@@ -26,7 +26,7 @@ namespace GladiatorFights.Fighters
             return new Rogue(Name, Health, Armor, Damage, _lucky);
         }
 
-        protected override void BeforeAttack(IDamageable target)
+        protected override void RunPreAttack(IDamageable target)
         {
             if (TryLucky())
             {

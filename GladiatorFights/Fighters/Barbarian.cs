@@ -42,7 +42,7 @@ namespace GladiatorFights.Fighters
             return $"Ярость";
         }
 
-        protected override void BeforeAttack(IDamageable target)
+        protected override void RunPreAttack(IDamageable target)
         {
             if (_rage >= _fullRage)
             {
@@ -54,7 +54,7 @@ namespace GladiatorFights.Fighters
             }
         }
 
-        protected override void AfterAttack(IDamageable target)
+        protected override void RunPostAttack(IDamageable target)
         {
             if (_rage >= _fullRage)
             {

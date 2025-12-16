@@ -54,6 +54,7 @@
     <Compile Include="Strategies\StandardAttackStrategy.cs" />
     <Compile Include="Strategies\IAttackStrategy.cs" />
     <Compile Include="Strategies\DoubleAttackStrategy.cs" />
+    <Compile Include="Strategies\TripleAttackStrategy.cs" />
     <Compile Include="UI\Menu.cs" />
     <Compile Include="UI\ObjectPainter.cs" />
     <Compile Include="Utils\UserUtils.cs" />

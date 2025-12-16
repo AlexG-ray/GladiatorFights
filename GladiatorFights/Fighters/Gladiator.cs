@@ -13,7 +13,7 @@ namespace GladiatorFights.Fighters
             : base(name, health, armor, damage)
         {
             _impactCounter = 0;
-            _tripleAttack = new DoubleAttackStrategy();
+            _tripleAttack = new TripleAttackStrategy();
         }
 
         public override string GetSpecialAbilities()
@@ -26,7 +26,7 @@ namespace GladiatorFights.Fighters
             return new Gladiator(Name, Health, Armor, Damage);
         }
 
-        protected override void BeforeAttack(IDamageable target)
+        protected override void RunPreAttack(IDamageable target)
         {
             _impactCounter++;
 
@@ -40,7 +40,7 @@ namespace GladiatorFights.Fighters
             }
         }
 
-        protected override void AfterAttack(IDamageable target)
+        protected override void RunPostAttack(IDamageable target)
         {
             if (_impactCounter >= _skillActivationHitCount)
             {

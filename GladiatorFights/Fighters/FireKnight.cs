@@ -26,12 +26,9 @@ namespace GladiatorFights.Fighters
         }
 
         public override FighterBase Clone()
-        {
-            var clone = new FireKnight(Name, Health, Armor, Damage, _mana);
-            return clone;
-        }
+            => new FireKnight(Name, Health, Armor, Damage, _mana);
 
-        protected override void BeforeAttack(IDamageable target)
+        protected override void RunPreAttack(IDamageable target)
         {
             if (_mana >= _manaCostFireball)
             {
@@ -45,7 +42,7 @@ namespace GladiatorFights.Fighters
             }
         }
 
-        protected override void AfterAttack(IDamageable target)
+        protected override void RunPostAttack(IDamageable target)
         {
             if (_canUsedFireball)
             {

@@ -36,14 +36,14 @@ namespace GladiatorFights
         {
             if (CanAttack(target) == false)
             {
-                OnAttackDenied(target);
+                ProcessAttackDenied(target);
                 return;
             }
 
-            BeforeAttack(target);
+            RunPreAttack(target);
             int damage = CalculateDamage(target);
             ApplyDamage(target, damage);
-            AfterAttack(target);
+            RunPostAttack(target);
         }
 
         public virtual void TakeDamage(int damage)
@@ -70,7 +70,7 @@ namespace GladiatorFights
 
         public abstract FighterBase Clone();
 
-        protected virtual void OnAttackDenied(IDamageable target) { }
+        protected virtual void ProcessAttackDenied(IDamageable target) { }
 
         protected virtual void ApplyDamage(IDamageable target, int damage) =>
             target.TakeDamage(damage);
@@ -78,9 +78,9 @@ namespace GladiatorFights
         protected virtual int CalculateDamage(IDamageable target) =>
             TypeAttack.CalculateDamage(this, target);
 
-        protected virtual void AfterAttack(IDamageable target) { }
+        protected virtual void RunPostAttack(IDamageable target) { }
 
-        protected virtual void BeforeAttack(IDamageable target) { }
+        protected virtual void RunPreAttack(IDamageable target) { }
 
         protected bool CanAttack(IDamageable target) =>
             IsAlive && target != null && target.IsAlive && target != this;

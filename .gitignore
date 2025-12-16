@@ -361,3 +361,24 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# EditorConfig и настройки анализаторов кода
+.editorconfig
+.editorconfig.*
+*.editorconfig
+
+# StyleCop и другие анализаторы
+StyleCopReport.xml
+*.StyleCop.xml
+StyleCop.settings
+.stylecop.json
+.stylecoprc
+
+# Анализаторы кода
+.analyzerconfig
+*.ruleset
+*.ruleset.user
+
+# Результаты анализа кода
+*.sarif
+*.codeanalysis

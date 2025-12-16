@@ -1,12 +1,14 @@
-﻿using GladiatorFights.Interfaces;
+﻿using System;
+using System.Runtime.InteropServices;
+
+using GladiatorFights.Interfaces;
 using GladiatorFights.Strategies;
-using System;
 
 namespace GladiatorFights
 {
     internal abstract class FighterBase : IAttacker, IDamageable
     {
-        protected static readonly StandardAttackStrategy S_StandardAttack = new StandardAttackStrategy();
+        protected static readonly StandardAttackStrategy StandardAttack = new StandardAttackStrategy();
 
         protected FighterBase(string name, int health, int armor, int damage)
         {
@@ -14,7 +16,7 @@ namespace GladiatorFights
             Health = health;
             Armor = armor;
             Damage = damage;
-            TypeAttack = S_StandardAttack;
+            TypeAttack = StandardAttack;
         }
 
         public string Name { get; protected set; }
@@ -59,7 +61,7 @@ namespace GladiatorFights
 
         public virtual string GetUsedAbilityDescription()
         {
-            if (TypeAttack != S_StandardAttack)
+            if (TypeAttack != StandardAttack)
             {
                 return TypeAttack.Description;
             }

@@ -1,5 +1,4 @@
 ﻿using GladiatorFights.Interfaces;
-using System;
 
 namespace GladiatorFights.Strategies
 {

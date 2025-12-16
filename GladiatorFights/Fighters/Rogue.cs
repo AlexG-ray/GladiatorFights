@@ -6,8 +6,8 @@ namespace GladiatorFights.Fighters
 {
     internal class Rogue : FighterBase
     {
-        private int _lucky;
         private readonly IAttackStrategy _doubleAttack;
+        private int _lucky;
 
         public Rogue(string name, int health, int armor, int damage, int lucky)
             : base(name, health, armor, damage)
@@ -34,7 +34,7 @@ namespace GladiatorFights.Fighters
             }
             else
             {
-                SetAttackStrategy(S_StandardAttack);
+                SetAttackStrategy(StandardAttack);
             }
         }
 

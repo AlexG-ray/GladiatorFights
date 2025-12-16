@@ -1,7 +1,7 @@
-﻿using GladiatorFights.Game;
-using GladiatorFights.Interfaces;
-using System;
+﻿using System;
 using System.Threading;
+using GladiatorFights.Game;
+using GladiatorFights.Interfaces;
 
 namespace GladiatorFights.UI
 {
@@ -37,7 +37,8 @@ namespace GladiatorFights.UI
                 Console.Clear();
                 _arena.StarFight();
                 ShowWinner(out isWork);
-            } while (isWork);
+            }
+            while (isWork);
         }
 
         private void ShowVersusScreen(int indexFirstFighter, int indexSecondFighter)
@@ -78,7 +79,7 @@ namespace GladiatorFights.UI
 
             while (Console.KeyAvailable == false)
             {
-                _sprite.DrawPressAnyKey("Нажмите любую кнопку",positionX, positionY, isVisible);
+                _sprite.DrawPressAnyKey("Нажмите любую кнопку", positionX, positionY, isVisible);
                 isVisible = !isVisible;
                 Thread.Sleep(400);
             }

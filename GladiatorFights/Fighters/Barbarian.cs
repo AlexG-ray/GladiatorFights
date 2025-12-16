@@ -7,9 +7,9 @@ namespace GladiatorFights.Fighters
     internal class Barbarian : FighterBase
     {
         private readonly RageAttackStrategy _rageAttack;
+        private readonly int _fullRage;
+        private readonly int _healingAmount;
         private int _rage;
-        private int _fullRage;
-        private int _healingAmount;
 
         public Barbarian(string name, int health, int armor, int damage, int fullRage)
             : base(name, health, armor, damage)
@@ -50,7 +50,7 @@ namespace GladiatorFights.Fighters
             }
             else
             {
-                SetAttackStrategy(S_StandardAttack);
+                SetAttackStrategy(StandardAttack);
             }
         }
 

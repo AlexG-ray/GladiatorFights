@@ -6,8 +6,8 @@ namespace GladiatorFights.Fighters
     internal class Gladiator : FighterBase
     {
         private readonly IAttackStrategy _tripleAttack;
+        private readonly int _skillActivationHitCount = 3;
         private int _impactCounter;
-        private int _skillActivationHitCount = 3;
 
         public Gladiator(string name, int health, int armor, int damage)
             : base(name, health, armor, damage)
@@ -36,7 +36,7 @@ namespace GladiatorFights.Fighters
             }
             else
             {
-                SetAttackStrategy(S_StandardAttack);
+                SetAttackStrategy(StandardAttack);
             }
         }
 

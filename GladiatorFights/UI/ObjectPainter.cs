@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace GladiatorFights.UI
 
+namespace GladiatorFights.UI
 {
     internal class ObjectPainter
     {
+        private static Action<int, int>[] s_nameDrawers;
         private int _windowSizeX = 110;
         private int _windowsSizeY = 270;
-
-        private static Action<int, int>[] s_nameDrawers;
 
         public ObjectPainter()
         {
@@ -100,8 +99,8 @@ namespace GladiatorFights.UI
             {
                 int row = i / cardsPerRow;
                 int col = i % cardsPerRow;
-                int x = startX + col * cardWidth;
-                int y = startY + row * 10;
+                int x = startX + (col * cardWidth);
+                int y = startY + (row * 10);
 
                 DrawCharacterCard(fighters[i], i + 1, x, y);
             }
@@ -123,7 +122,7 @@ namespace GladiatorFights.UI
             Console.SetCursorPosition(x, y++);
             Console.Write(border);
 
-            Console.SetCursorPosition(x + cardWidth / 2 - 1, y++);
+            Console.SetCursorPosition(x + (cardWidth / 2) - 1, y++);
             Console.Write($"{numberTitle}{number.ToString()}");
 
             Console.SetCursorPosition(x, y++);

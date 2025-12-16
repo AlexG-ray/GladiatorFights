@@ -7,8 +7,8 @@ namespace GladiatorFights.Fighters
     internal class Paladin : FighterBase
     {
         private readonly IAttackStrategy _lightOfAttack;
+        private readonly int _maxSanctity;
         private int _sanctity;
-        private int _maxSanctity;
 
         public Paladin(string name, int health, int armor, int damage, int maxSanctity)
             : base(name, health, armor, damage)
@@ -43,7 +43,7 @@ namespace GladiatorFights.Fighters
             }
             else
             {
-                SetAttackStrategy(S_StandardAttack);
+                SetAttackStrategy(StandardAttack);
             }
         }
 

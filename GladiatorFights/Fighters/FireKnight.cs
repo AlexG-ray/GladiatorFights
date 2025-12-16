@@ -6,9 +6,9 @@ namespace GladiatorFights.Fighters
     internal class FireKnight : FighterBase
     {
         private readonly IAttackStrategy _fireballAttack;
+        private readonly int _manaCostFireball;
+        private readonly int _regenerationMana;
         private int _mana;
-        private int _manaCostFireball;
-        private int _regenerationMana;
         private bool _canUsedFireball;
 
         public FireKnight(string name, int health, int armor, int damage, int mana)
@@ -40,7 +40,7 @@ namespace GladiatorFights.Fighters
             }
             else
             {
-                SetAttackStrategy(S_StandardAttack);
+                SetAttackStrategy(StandardAttack);
                 _canUsedFireball = false;
             }
         }

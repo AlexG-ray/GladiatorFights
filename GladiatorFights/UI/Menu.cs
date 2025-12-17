@@ -13,6 +13,10 @@ namespace GladiatorFights.UI
         private ObjectPainter _sprite;
         private int _indexFirstFighter;
         private int _indexSecondFighter;
+        private int _positionCursoreX;
+        private int _positionCursoreY;
+        private int _offsetCursoreX;
+        private int _offsetCursoreY;
 
         public Menu()
         {
@@ -48,19 +52,22 @@ namespace GladiatorFights.UI
             Console.CursorVisible = false;
 
             Thread.Sleep(500);
-            int positionX = 20;
-            int positionY = 5;
-            _sprite.DrawFighterNameByIndex(indexFirstFighter, ref positionX, ref positionY);
+            _positionCursoreX = 20;
+            _positionCursoreY = 5;
+            _sprite.DrawFighterNameByIndex(indexFirstFighter, ref _positionCursoreX, ref _positionCursoreY);
             Thread.Sleep(700);
 
-            positionX += 30;
-            positionY += 2;
-            _sprite.DrawTextVersus(ref positionX, ref positionY);
+            _offsetCursoreX = 30;
+            _offsetCursoreY = 2;
+            _positionCursoreX += _offsetCursoreX;
+            _positionCursoreY += _offsetCursoreY;
+            _sprite.DrawTextVersus(ref _positionCursoreX, ref _positionCursoreY);
             Thread.Sleep(700);
 
-            positionX += 7;
-            positionY += 2;
-            _sprite.DrawFighterNameByIndex(indexSecondFighter, ref positionX, ref positionY);
+            _offsetCursoreX = 7;
+            _positionCursoreX += _offsetCursoreX;
+            _positionCursoreY += _offsetCursoreY;
+            _sprite.DrawFighterNameByIndex(indexSecondFighter, ref _positionCursoreX, ref _positionCursoreY);
             Thread.Sleep(1000);
 
             Console.Clear();
@@ -71,16 +78,18 @@ namespace GladiatorFights.UI
         private void ShowSplashScreen()
         {
             Console.Clear();
-            _sprite.DrawSplashScreen();
-            int positionX = 55;
-            int positionY = 19;
+            _positionCursoreX = 15;
+            _positionCursoreY = 5;
+            _sprite.DrawSplashScreen(_positionCursoreX, _positionCursoreY);
+            _positionCursoreX = 55;
+            _positionCursoreY = 19;
             Console.CursorVisible = false;
 
             bool isVisible = true;
 
             while (Console.KeyAvailable == false)
             {
-                _sprite.DrawPressAnyKey("Нажмите любую кнопку", positionX, positionY, isVisible);
+                _sprite.DrawPressAnyKey("Нажмите любую кнопку", _positionCursoreX, _positionCursoreY, isVisible);
                 isVisible = !isVisible;
                 Thread.Sleep(400);
             }
@@ -139,18 +148,21 @@ namespace GladiatorFights.UI
         private void ShowWinner()
         {
             Console.Clear();
-            int positionX = 25;
-            int positionY = 3;
-            _sprite.DrawWinnerScreen(ref positionX, ref positionY);
+            _positionCursoreX = 25;
+            _positionCursoreY = 3;
+            _sprite.DrawWinnerScreen(ref _positionCursoreX, ref _positionCursoreY);
 
             int indexWinner = _fighters.GetIndexByName(_arena.Winner.Name);
-            positionX += 15;
-            positionY += 5;
-            _sprite.DrawFighterNameByIndex(indexWinner, ref positionX, ref positionY);
+            _offsetCursoreX = 15;
+            _offsetCursoreY = 5;
+            _positionCursoreX += _offsetCursoreX;
+            _positionCursoreY += _offsetCursoreY;
+            _sprite.DrawFighterNameByIndex(indexWinner, ref _positionCursoreX, ref _positionCursoreY);
 
-            positionY += 8;
-            positionX = 30;
-            Console.SetCursorPosition(positionX, positionY);
+            _offsetCursoreY = 8;
+            _positionCursoreY += _offsetCursoreY;
+            _positionCursoreX = 35;
+            Console.SetCursorPosition(_positionCursoreX, _positionCursoreY);
         }
 
         private bool ChoseRestartOrExit()

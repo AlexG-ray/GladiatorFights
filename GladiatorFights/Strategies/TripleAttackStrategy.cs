@@ -4,11 +4,13 @@ namespace GladiatorFights.Strategies
 {
     internal class TripleAttackStrategy : IAttackStrategy
     {
+        private int _damageMultiplierForTripleAttack = 3;
+
         public string Description => "тройной урон";
 
         public int CalculateDamage(FighterBase attacker, IDamageable target)
         {
-            return attacker.Damage * 3;
+            return attacker.Damage * _damageMultiplierForTripleAttack;
         }
     }
 }

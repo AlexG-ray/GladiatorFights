@@ -8,6 +8,10 @@ namespace GladiatorFights.UI
         private Action<int, int>[] _nameDrawers;
         private int _windowSizeX = 110;
         private int _windowsSizeY = 270;
+        private int _positionCursoreX;
+        private int _positionCursoreY;
+        private int _offsetCursoreX;
+        private int _offsetCursoreY;
 
         public ObjectPainter()
         {
@@ -33,14 +37,13 @@ namespace GladiatorFights.UI
             {
                 int startY = positionY;
                 _nameDrawers[fighterIndex](positionX, positionY);
-                positionY = startY + 5;
+                _offsetCursoreY = 5;
+                positionY = startY + _offsetCursoreY;
             }
         }
 
-        public void DrawSplashScreen()
+        public void DrawSplashScreen(int positionX, int positionY)
         {
-            int positionX = 15;
-            int positionY = 5;
             Console.SetCursorPosition(positionX, positionY++);
             Console.WriteLine(" ██████╗ ██╗      █████╗ ██████╗ ██╗ █████╗ ████████╗ ██████╗ ██████╗ ");
             Console.SetCursorPosition(positionX, positionY++);
@@ -53,7 +56,8 @@ namespace GladiatorFights.UI
             Console.WriteLine("╚██████╔╝███████╗██║  ██║██████╔╝██║██║  ██║   ██║   ╚██████╔╝██║  ██║");
             Console.SetCursorPosition(positionX, positionY++);
             Console.WriteLine(" ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═════╝ ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝");
-            positionX += 40;
+            _offsetCursoreX = 40;
+            positionX += _offsetCursoreX;
             Console.SetCursorPosition(positionX, positionY++);
             Console.WriteLine("███████╗██╗ ██████╗ ██╗  ██╗████████╗███████╗");
             Console.SetCursorPosition(positionX, positionY++);
@@ -100,7 +104,8 @@ namespace GladiatorFights.UI
                 int row = i / cardsPerRow;
                 int col = i % cardsPerRow;
                 int x = startX + (col * cardWidth);
-                int y = startY + (row * 10);
+                int lineCountInCard = 10;
+                int y = startY + (row * lineCountInCard);
 
                 DrawCharacterCard(fighters[i], i + 1, x, y);
             }
@@ -169,7 +174,8 @@ namespace GladiatorFights.UI
         {
             int startY = positionY;
             DrawWinnerScreen(positionX, positionY);
-            positionY = startY + 7;
+            _offsetCursoreY = 7;
+            positionY = startY + _offsetCursoreY;
         }
 
         public void DrawNameBarbarian(int positionX, int positionY)
@@ -190,7 +196,8 @@ namespace GladiatorFights.UI
         {
             int startY = positionY;
             DrawNameBarbarian(positionX, positionY);
-            positionY = startY + 5;
+            _offsetCursoreX = 5;
+            positionY = startY + _offsetCursoreX;
         }
 
         public void DrawNameFireKnight(int positionX, int positionY)
@@ -211,7 +218,8 @@ namespace GladiatorFights.UI
         {
             int startY = positionY;
             DrawNameFireKnight(positionX, positionY);
-            positionY = startY + 5;
+            _offsetCursoreY = 5;
+            positionY = startY + _offsetCursoreY;
         }
 
         public void DrawNameGladiator(int positionX, int positionY)
@@ -232,7 +240,8 @@ namespace GladiatorFights.UI
         {
             int startY = positionY;
             DrawNameGladiator(positionX, positionY);
-            positionY = startY + 5;
+            _offsetCursoreY = 5;
+            positionY = startY + _offsetCursoreY;
         }
 
         public void DrawNameMonk(int positionX, int positionY)
@@ -253,7 +262,8 @@ namespace GladiatorFights.UI
         {
             int startY = positionY;
             DrawNameMonk(positionX, positionY);
-            positionY = startY + 5;
+            _offsetCursoreY = 5;
+            positionY = startY + _offsetCursoreY;
         }
 
         public void DrawNameRogue(int positionX, int positionY)
@@ -274,7 +284,8 @@ namespace GladiatorFights.UI
         {
             int startY = positionY;
             DrawNameRogue(positionX, positionY);
-            positionY = startY + 5;
+            _offsetCursoreY = 5;
+            positionY = startY + _offsetCursoreY;
         }
 
         public void DrawNamePaladin(int positionX, int positionY)
@@ -295,7 +306,8 @@ namespace GladiatorFights.UI
         {
             int startY = positionY;
             DrawNamePaladin(positionX, positionY);
-            positionY = startY + 5;
+            _offsetCursoreY = 5;
+            positionY = startY + _offsetCursoreY;
         }
 
         public void DrawTextVersus(int positionX, int positionY)
@@ -316,7 +328,8 @@ namespace GladiatorFights.UI
         {
             int startY = positionY;
             DrawTextVersus(positionX, positionY);
-            positionY = startY + 5;
+            _offsetCursoreY = 5;
+            positionY = startY + _offsetCursoreY;
         }
 
         public void DrawTextFight(int positionX, int positionY)
@@ -343,7 +356,8 @@ namespace GladiatorFights.UI
         {
             int startY = positionY;
             DrawTextFight(positionX, positionY);
-            positionY = startY + 8;
+            _offsetCursoreY = 8;
+            positionY = startY + _offsetCursoreY;
         }
     }
 }

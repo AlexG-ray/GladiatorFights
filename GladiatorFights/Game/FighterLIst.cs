@@ -33,7 +33,7 @@ namespace GladiatorFights.Game
         }
 
         public List<FighterBase> GetAllFighters() =>
-             _fighters;
+            new List<FighterBase>(_fighters);
 
         public int GetIndexByName(string name) =>
             _fighters.FindIndex(figter => figter.Name == name);

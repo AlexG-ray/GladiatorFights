@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+
 using GladiatorFights.Game;
 using GladiatorFights.Interfaces;
 
@@ -115,10 +116,11 @@ namespace GladiatorFights.UI
 
         private int GetValidIndex(string text)
         {
-            int number;
+            int number = 1;
             int maxFighters = _fighters.Count;
+            bool isRepeated = true;
 
-            while (true)
+            while (isRepeated)
             {
                 Console.Write(text + " ");
                 string input = Console.ReadLine();
@@ -126,23 +128,25 @@ namespace GladiatorFights.UI
                 if (int.TryParse(input, out number) == false)
                 {
                     Console.WriteLine("Ошибка: Введите число!");
-                    continue;
                 }
-
-                if (number <= 0)
+                else
                 {
-                    Console.WriteLine($"Ошибка: Номер должен быть больше нуля!");
-                    continue;
+                    if (number <= 0)
+                    {
+                        Console.WriteLine($"Ошибка: Номер должен быть больше нуля!");
+                    }
+                    else if (number > maxFighters)
+                    {
+                        Console.WriteLine($"Ошибка: Номер не должен быть больше {maxFighters}!");
+                    }
+                    else
+                    {
+                        isRepeated = false;
+                    }
                 }
-
-                if (number > maxFighters)
-                {
-                    Console.WriteLine($"Ошибка: Номер не должен быть больше {maxFighters}!");
-                    continue;
-                }
-
-                return number - 1;
             }
+
+            return number - 1;
         }
 
         private void ShowWinner()
@@ -167,7 +171,8 @@ namespace GladiatorFights.UI
 
         private bool ChoseRestartOrExit()
         {
-            bool isRestarting;
+            bool isRestarting = true;
+            bool isWork = true;
             ConsoleKey restartKey = ConsoleKey.Enter;
             ConsoleKey exitKey = ConsoleKey.Escape;
             Console.WriteLine($"Нажмите {restartKey} для перезапуска или {exitKey} для выхода");
@@ -179,20 +184,20 @@ namespace GladiatorFights.UI
                 Console.ReadKey(true);
             }
 
-            while (true)
+            while (isWork)
             {
                 keyInfo = Console.ReadKey(true);
 
                 if (keyInfo.Key == restartKey)
                 {
                     isRestarting = true;
-                    break;
+                    isWork = false;
                 }
 
                 if (keyInfo.Key == exitKey)
                 {
                     isRestarting = false;
-                    break;
+                    isWork = false;
                 }
             }
 

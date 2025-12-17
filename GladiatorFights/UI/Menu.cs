@@ -23,7 +23,7 @@ namespace GladiatorFights.UI
 
         public void Run()
         {
-            bool isWork = true;
+            bool isWork;
 
             do
             {
@@ -36,7 +36,8 @@ namespace GladiatorFights.UI
                 _arena = new BattleEngine(firstFighter, secondFighter, _logger);
                 Console.Clear();
                 _arena.StarFight();
-                ShowWinner(out isWork);
+                ShowWinner();
+                isWork = ChoseRestartOrExit();
             }
             while (isWork);
         }
@@ -135,7 +136,7 @@ namespace GladiatorFights.UI
             }
         }
 
-        private void ShowWinner(out bool isWork)
+        private void ShowWinner()
         {
             Console.Clear();
             int positionX = 25;
@@ -150,11 +151,14 @@ namespace GladiatorFights.UI
             positionY += 8;
             positionX = 30;
             Console.SetCursorPosition(positionX, positionY);
+        }
 
+        private bool ChoseRestartOrExit()
+        {
+            bool isRestarting;
             ConsoleKey restartKey = ConsoleKey.Enter;
             ConsoleKey exitKey = ConsoleKey.Escape;
             Console.WriteLine($"Нажмите {restartKey} для перезапуска или {exitKey} для выхода");
-
             Console.CursorVisible = false;
             ConsoleKeyInfo keyInfo;
 
@@ -169,18 +173,20 @@ namespace GladiatorFights.UI
 
                 if (keyInfo.Key == restartKey)
                 {
-                    isWork = true;
+                    isRestarting = true;
                     break;
                 }
 
                 if (keyInfo.Key == exitKey)
                 {
-                    isWork = false;
+                    isRestarting = false;
                     break;
                 }
             }
 
             Console.CursorVisible = true;
+
+            return isRestarting;
         }
     }
 }

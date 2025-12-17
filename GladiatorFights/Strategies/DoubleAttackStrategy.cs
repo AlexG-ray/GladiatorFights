@@ -4,13 +4,16 @@ namespace GladiatorFights.Strategies
 {
     internal class DoubleAttackStrategy : IAttackStrategy
     {
-        private int _damageMultiplierForDoubleAttack = 2;
+        private readonly StandardAttackStrategy _standardAttack = new StandardAttackStrategy();
 
-        public string Description => "двойной удар";
+        public string Description => "двойная атака";
 
         public int CalculateDamage(FighterBase attacker, IDamageable target)
         {
-            return attacker.Damage * _damageMultiplierForDoubleAttack;
+            int firstAttack = _standardAttack.CalculateDamage(attacker, target);
+            int secondAttack = _standardAttack.CalculateDamage(attacker, target);
+
+            return firstAttack + secondAttack;
         }
     }
 }

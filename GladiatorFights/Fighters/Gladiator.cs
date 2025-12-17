@@ -5,7 +5,7 @@ namespace GladiatorFights.Fighters
 {
     internal class Gladiator : FighterBase
     {
-        private readonly IAttackStrategy _tripleAttack;
+        private readonly IAttackStrategy _doubleAttack;
         private readonly int _skillActivationHitCount = 3;
         private int _impactCounter;
 
@@ -13,12 +13,12 @@ namespace GladiatorFights.Fighters
             : base(name, health, armor, damage)
         {
             _impactCounter = 0;
-            _tripleAttack = new TripleAttackStrategy();
+            _doubleAttack = new DoubleAttackStrategy();
         }
 
         public override string GetSpecialAbilities()
         {
-            return "Двойной урон";
+            return "Двойная атака";
         }
 
         public override FighterBase Clone()
@@ -32,7 +32,7 @@ namespace GladiatorFights.Fighters
 
             if (_impactCounter % _skillActivationHitCount == 0)
             {
-                SetAttackStrategy(_tripleAttack);
+                SetAttackStrategy(_doubleAttack);
             }
             else
             {

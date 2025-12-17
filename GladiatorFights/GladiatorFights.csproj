@@ -49,12 +49,12 @@
     <Compile Include="Interfaces\IAttacker.cs" />
     <Compile Include="Interfaces\IDamageable.cs" />
     <Compile Include="Strategies\AttackOfLightStrategy.cs" />
+    <Compile Include="Strategies\DoubleDamageStarategy.cs" />
     <Compile Include="Strategies\FireballAttackStrategy.cs" />
     <Compile Include="Strategies\RageAttackStrategy.cs" />
     <Compile Include="Strategies\StandardAttackStrategy.cs" />
     <Compile Include="Strategies\IAttackStrategy.cs" />
     <Compile Include="Strategies\DoubleAttackStrategy.cs" />
-    <Compile Include="Strategies\TripleAttackStrategy.cs" />
     <Compile Include="UI\Menu.cs" />
     <Compile Include="UI\ObjectPainter.cs" />
     <Compile Include="Utils\UserUtils.cs" />

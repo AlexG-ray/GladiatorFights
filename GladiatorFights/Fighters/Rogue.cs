@@ -6,14 +6,14 @@ namespace GladiatorFights.Fighters
 {
     internal class Rogue : FighterBase
     {
-        private readonly IAttackStrategy _doubleAttack;
+        private readonly IAttackStrategy _doubleDamageAttack;
         private int _lucky;
 
         public Rogue(string name, int health, int armor, int damage, int lucky)
             : base(name, health, armor, damage)
         {
             _lucky = lucky;
-            _doubleAttack = new DoubleAttackStrategy();
+            _doubleDamageAttack = new DoubleDamageStarategy();
         }
 
         public override string GetSpecialAbilities()
@@ -30,7 +30,7 @@ namespace GladiatorFights.Fighters
         {
             if (TryLucky())
             {
-                SetAttackStrategy(_doubleAttack);
+                SetAttackStrategy(_doubleDamageAttack);
             }
             else
             {

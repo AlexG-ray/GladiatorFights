@@ -14,10 +14,10 @@ namespace GladiatorFights.UI
         private ObjectPainter _sprite;
         private int _indexFirstFighter;
         private int _indexSecondFighter;
-        private int _positionCursoreX;
-        private int _positionCursoreY;
-        private int _offsetCursoreX;
-        private int _offsetCursoreY;
+        private int _positionCursorX;
+        private int _positionCursorY;
+        private int _offsetCursorX;
+        private int _offsetCursorY;
 
         public Menu()
         {
@@ -53,22 +53,22 @@ namespace GladiatorFights.UI
             Console.CursorVisible = false;
 
             Thread.Sleep(500);
-            _positionCursoreX = 20;
-            _positionCursoreY = 5;
-            _sprite.DrawFighterNameByIndex(indexFirstFighter, ref _positionCursoreX, ref _positionCursoreY);
+            _positionCursorX = 20;
+            _positionCursorY = 5;
+            _sprite.DrawFighterNameByIndex(indexFirstFighter, ref _positionCursorX, ref _positionCursorY);
             Thread.Sleep(700);
 
-            _offsetCursoreX = 30;
-            _offsetCursoreY = 2;
-            _positionCursoreX += _offsetCursoreX;
-            _positionCursoreY += _offsetCursoreY;
-            _sprite.DrawTextVersus(ref _positionCursoreX, ref _positionCursoreY);
+            _offsetCursorX = 30;
+            _offsetCursorY = 2;
+            _positionCursorX += _offsetCursorX;
+            _positionCursorY += _offsetCursorY;
+            _sprite.DrawTextVersus(ref _positionCursorX, ref _positionCursorY);
             Thread.Sleep(700);
 
-            _offsetCursoreX = 7;
-            _positionCursoreX += _offsetCursoreX;
-            _positionCursoreY += _offsetCursoreY;
-            _sprite.DrawFighterNameByIndex(indexSecondFighter, ref _positionCursoreX, ref _positionCursoreY);
+            _offsetCursorX = 7;
+            _positionCursorX += _offsetCursorX;
+            _positionCursorY += _offsetCursorY;
+            _sprite.DrawFighterNameByIndex(indexSecondFighter, ref _positionCursorX, ref _positionCursorY);
             Thread.Sleep(1000);
 
             Console.Clear();
@@ -79,18 +79,18 @@ namespace GladiatorFights.UI
         private void ShowSplashScreen()
         {
             Console.Clear();
-            _positionCursoreX = 15;
-            _positionCursoreY = 5;
-            _sprite.DrawSplashScreen(_positionCursoreX, _positionCursoreY);
-            _positionCursoreX = 55;
-            _positionCursoreY = 19;
+            _positionCursorX = 15;
+            _positionCursorY = 5;
+            _sprite.DrawSplashScreen(_positionCursorX, _positionCursorY);
+            _positionCursorX = 55;
+            _positionCursorY = 19;
             Console.CursorVisible = false;
 
             bool isVisible = true;
 
             while (Console.KeyAvailable == false)
             {
-                _sprite.DrawPressAnyKey("Нажмите любую кнопку", _positionCursoreX, _positionCursoreY, isVisible);
+                _sprite.DrawPressAnyKey("Нажмите любую кнопку", _positionCursorX, _positionCursorY, isVisible);
                 isVisible = !isVisible;
                 Thread.Sleep(400);
             }
@@ -152,21 +152,21 @@ namespace GladiatorFights.UI
         private void ShowWinner()
         {
             Console.Clear();
-            _positionCursoreX = 25;
-            _positionCursoreY = 3;
-            _sprite.DrawWinnerScreen(ref _positionCursoreX, ref _positionCursoreY);
+            _positionCursorX = 25;
+            _positionCursorY = 3;
+            _sprite.DrawWinnerScreen(ref _positionCursorX, ref _positionCursorY);
 
             int indexWinner = _fighters.GetIndexByName(_arena.Winner.Name);
-            _offsetCursoreX = 15;
-            _offsetCursoreY = 5;
-            _positionCursoreX += _offsetCursoreX;
-            _positionCursoreY += _offsetCursoreY;
-            _sprite.DrawFighterNameByIndex(indexWinner, ref _positionCursoreX, ref _positionCursoreY);
+            _offsetCursorX = 15;
+            _offsetCursorY = 5;
+            _positionCursorX += _offsetCursorX;
+            _positionCursorY += _offsetCursorY;
+            _sprite.DrawFighterNameByIndex(indexWinner, ref _positionCursorX, ref _positionCursorY);
 
-            _offsetCursoreY = 8;
-            _positionCursoreY += _offsetCursoreY;
-            _positionCursoreX = 35;
-            Console.SetCursorPosition(_positionCursoreX, _positionCursoreY);
+            _offsetCursorY = 8;
+            _positionCursorY += _offsetCursorY;
+            _positionCursorX = 35;
+            Console.SetCursorPosition(_positionCursorX, _positionCursorY);
         }
 
         private bool ChoseRestartOrExit()

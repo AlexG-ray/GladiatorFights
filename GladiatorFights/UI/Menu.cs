@@ -42,7 +42,7 @@ namespace GladiatorFights.UI
                 Console.Clear();
                 _arena.StarFight();
                 ShowWinner();
-                isWork = ChoseRestartOrExit();
+                isWork = ConfirmContinuation();
             }
             while (isWork);
         }
@@ -169,9 +169,9 @@ namespace GladiatorFights.UI
             Console.SetCursorPosition(_positionCursorX, _positionCursorY);
         }
 
-        private bool ChoseRestartOrExit()
+        private bool ConfirmContinuation()
         {
-            bool isRestarting = true;
+            bool isContinue = true;
             bool isWork = true;
             ConsoleKey restartKey = ConsoleKey.Enter;
             ConsoleKey exitKey = ConsoleKey.Escape;
@@ -190,20 +190,20 @@ namespace GladiatorFights.UI
 
                 if (keyInfo.Key == restartKey)
                 {
-                    isRestarting = true;
+                    isContinue = true;
                     isWork = false;
                 }
 
                 if (keyInfo.Key == exitKey)
                 {
-                    isRestarting = false;
+                    isContinue = false;
                     isWork = false;
                 }
             }
 
             Console.CursorVisible = true;
 
-            return isRestarting;
+            return isContinue;
         }
     }
 }

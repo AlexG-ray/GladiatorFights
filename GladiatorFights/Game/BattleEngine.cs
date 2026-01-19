@@ -49,6 +49,8 @@ namespace GladiatorFights.Game
         private void PerformAttack(FighterBase attacker, FighterBase assailed)
         {
             attacker.Attack(assailed);
+            _logger.LogAbility(attacker);
+
             if (assailed.ReceivedDamagesThisAttack.Count == 0)
             {
                 _logger.LogAttack(attacker, assailed, 0);
@@ -63,7 +65,6 @@ namespace GladiatorFights.Game
                 }
             }
 
-            _logger.LogAbility(attacker);
             _logger.LogStats(assailed);
         }
     }

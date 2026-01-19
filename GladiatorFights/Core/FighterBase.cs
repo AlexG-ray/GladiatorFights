@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using GladiatorFights.Interfaces;
 using GladiatorFights.Strategies;
@@ -7,6 +8,8 @@ namespace GladiatorFights
 {
     internal abstract class FighterBase : IAttacker, IDamageable
     {
+        private readonly List<int> _receivedDamagesThisAttack = new List<int>();
+
         protected FighterBase(string name, int health, int armor, int damage)
         {
             StandardAttack = new StandardAttackStrategy();
@@ -27,6 +30,8 @@ namespace GladiatorFights
 
         public int ReceivedDamage { get; protected set; }
 
+        public IReadOnlyList<int> ReceivedDamagesThisAttack => _receivedDamagesThisAttack;
+
         public bool IsAlive => Health > 0;
 
         protected StandardAttackStrategy StandardAttack { get; set; }
@@ -41,9 +46,14 @@ namespace GladiatorFights
                 return;
             }
 
+            if (target is FighterBase targetFighter)
+            {
+                targetFighter.ReceivedDamage = 0;
+                targetFighter._receivedDamagesThisAttack.Clear();
+            }
+
             RunPreAttack(target);
-            int damage = CalculateDamage(target);
-            ApplyDamage(target, damage);
+            TypeAttack.ExecuteAttack(this, target);
             RunPostAttack(target);
         }
 
@@ -51,7 +61,8 @@ namespace GladiatorFights
         {
             damage = Math.Max(damage - Armor, 0);
             Health = Math.Max(Health - damage, 0);
-            ReceivedDamage = damage;
+            ReceivedDamage += damage;
+            _receivedDamagesThisAttack.Add(damage);
         }
 
         public virtual string GetSpecialAbilities()
@@ -72,12 +83,6 @@ namespace GladiatorFights
         public abstract FighterBase Clone();
 
         protected virtual void ProcessAttackDenied(IDamageable target) { }
-
-        protected virtual void ApplyDamage(IDamageable target, int damage) =>
-            target.TakeDamage(damage);
-
-        protected virtual int CalculateDamage(IDamageable target) =>
-            TypeAttack.CalculateDamage(this, target);
 
         protected virtual void RunPostAttack(IDamageable target) { }
 

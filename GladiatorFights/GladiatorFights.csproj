@@ -49,7 +49,7 @@
     <Compile Include="Interfaces\IAttacker.cs" />
     <Compile Include="Interfaces\IDamageable.cs" />
     <Compile Include="Strategies\AttackOfLightStrategy.cs" />
-    <Compile Include="Strategies\DoubleDamageStarategy.cs" />
+    <Compile Include="Strategies\DoubleDamageStrategy.cs" />
     <Compile Include="Strategies\FireballAttackStrategy.cs" />
     <Compile Include="Strategies\RageAttackStrategy.cs" />
     <Compile Include="Strategies\StandardAttackStrategy.cs" />

@@ -28,7 +28,7 @@ namespace GladiatorFights.UI
 
         public void Run()
         {
-            bool isWork;
+            bool isRunning;
 
             do
             {
@@ -42,9 +42,9 @@ namespace GladiatorFights.UI
                 Console.Clear();
                 _arena.StarFight();
                 ShowWinner();
-                isWork = ConfirmContinuation();
+                isRunning = ConfirmContinuation();
             }
-            while (isWork);
+            while (isRunning);
         }
 
         private void ShowVersusScreen(int indexFirstFighter, int indexSecondFighter)

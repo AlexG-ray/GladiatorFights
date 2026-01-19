@@ -13,7 +13,7 @@ namespace GladiatorFights.Fighters
             : base(name, health, armor, damage)
         {
             _lucky = lucky;
-            _doubleDamageAttack = new DoubleDamageStarategy();
+            _doubleDamageAttack = new DoubleDamageStrategy();
         }
 
         public override string GetSpecialAbilities()

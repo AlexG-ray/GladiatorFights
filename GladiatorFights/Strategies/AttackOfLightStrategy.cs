@@ -8,9 +8,9 @@ namespace GladiatorFights.Strategies
 
         public string Description => "атака света";
 
-        public int CalculateDamage(FighterBase attacker, IDamageable target)
+        public void ExecuteAttack(FighterBase attacker, IDamageable target)
         {
-            return attacker.Damage * _damageMultiplierForLightAttack;
+            target.TakeDamage(attacker.Damage * _damageMultiplierForLightAttack);
         }
     }
 }

@@ -8,11 +8,9 @@ namespace GladiatorFights.Strategies
 
         public string Description => "огненный шар";
 
-        public int CalculateDamage(FighterBase attacker, IDamageable target)
+        public void ExecuteAttack(FighterBase attacker, IDamageable target)
         {
-            int damageFireball = attacker.Damage * _damageMultiplierForFireballAttack;
-
-            return damageFireball;
+            target.TakeDamage(attacker.Damage * _damageMultiplierForFireballAttack);
         }
     }
 }

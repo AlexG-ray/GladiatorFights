@@ -6,9 +6,9 @@ namespace GladiatorFights.Strategies
     {
         public string Description => "обычный удар";
 
-        public int CalculateDamage(FighterBase attacker, IDamageable target)
+        public void ExecuteAttack(FighterBase attacker, IDamageable target)
         {
-            return attacker.Damage;
+            target.TakeDamage(attacker.Damage);
         }
     }
 }

@@ -8,9 +8,9 @@ namespace GladiatorFights.Strategies
 
         public string Description => "яростная атака";
 
-        public int CalculateDamage(FighterBase attacker, IDamageable target)
+        public void ExecuteAttack(FighterBase attacker, IDamageable target)
         {
-            return attacker.Damage * _damageMultiplierForRageAttack;
+            target.TakeDamage(attacker.Damage * _damageMultiplierForRageAttack);
         }
     }
 }

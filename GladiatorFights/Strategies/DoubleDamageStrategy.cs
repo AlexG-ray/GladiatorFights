@@ -2,15 +2,15 @@
 
 namespace GladiatorFights.Strategies
 {
-    internal class DoubleDamageStarategy : IAttackStrategy
+    internal class DoubleDamageStrategy : IAttackStrategy
     {
         private int _damageMultiplierForDoubleDamageAttack = 2;
 
         public string Description => "двойной урон";
 
-        public int CalculateDamage(FighterBase attacker, IDamageable target)
+        public void ExecuteAttack(FighterBase attacker, IDamageable target)
         {
-            return attacker.Damage * _damageMultiplierForDoubleDamageAttack;
+            target.TakeDamage(attacker.Damage * _damageMultiplierForDoubleDamageAttack);
         }
     }
 }

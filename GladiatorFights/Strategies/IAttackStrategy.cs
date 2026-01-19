@@ -6,6 +6,6 @@ namespace GladiatorFights.Strategies
     {
         string Description { get; }
 
-        int CalculateDamage(FighterBase attacker, IDamageable target);
+        void ExecuteAttack(FighterBase attacker, IDamageable target);
     }
 }

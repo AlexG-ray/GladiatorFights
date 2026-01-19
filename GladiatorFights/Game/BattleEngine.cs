@@ -46,12 +46,24 @@ namespace GladiatorFights.Game
             }
         }
 
-        private void PerformAttack(FighterBase attaker, FighterBase assailed)
+        private void PerformAttack(FighterBase attacker, FighterBase assailed)
         {
-            _logger.LogAttack(attaker, assailed, attaker.Damage);
-            attaker.Attack(assailed);
-            _logger.LogAbility(attaker);
-            _logger.LogDamage(assailed, assailed.ReceivedDamage);
+            attacker.Attack(assailed);
+            if (assailed.ReceivedDamagesThisAttack.Count == 0)
+            {
+                _logger.LogAttack(attacker, assailed, 0);
+                _logger.LogDamage(assailed, 0);
+            }
+            else
+            {
+                foreach (int hitDamage in assailed.ReceivedDamagesThisAttack)
+                {
+                    _logger.LogAttack(attacker, assailed, hitDamage);
+                    _logger.LogDamage(assailed, hitDamage);
+                }
+            }
+
+            _logger.LogAbility(attacker);
             _logger.LogStats(assailed);
         }
     }
